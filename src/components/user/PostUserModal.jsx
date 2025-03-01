@@ -53,7 +53,7 @@ const AddUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
      name="name"
      value={formData.name}
      onChange={handleChange}
-     className="bg-gray-300 text-gray-600 mt-1 block py-2 px-8  border-b-4  border-gray-700 rounded-md  focus:outline-none  focus:border-sky-700 "  
+     className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3  border-b-4  border-gray-700 rounded-md  focus:outline-none  focus:border-sky-700 "  
      />
             </div>
             <div>

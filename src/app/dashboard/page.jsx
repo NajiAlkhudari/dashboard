@@ -56,7 +56,7 @@ const Page = () => {
           View
         </Button>
         <p className="text-gray-700 text-center">
-          Manage companies, edit details, and control business account settings.
+          Manage agents, edit details, and control business account settings.
         </p>
       </Card>
       <Card
@@ -86,7 +86,7 @@ View
         </Button>
 
         <p className="text-gray-700 text-center">
-          Manage companies, edit details, and control business account settings.
+          Manage supscriptions, edit details, and control business account settings.
         </p>
       </Card>
     </div>

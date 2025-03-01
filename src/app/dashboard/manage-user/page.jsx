@@ -94,7 +94,7 @@ const Page = () => {
   ];
 
   return (
-
+<Card>
       <div className="p-6">
         <div className="flex flex-row justify-between">
           <h1 className="text-2xl font-bold mb-4">Users Table</h1>
@@ -107,16 +107,6 @@ const Page = () => {
             </button>
           )}
         </div>
-
-          {/* <Table
-            data={users}
-            columns={columns}
-            onDelete={hasPermission ? (id) => {
-              setUserIdToDelete(id);
-              setIsModalOpen(true);
-            } : null}
-            onUpdate={hasPermission ? openModalUpdate : null}
-          /> */}
      <Table
   data={users} 
   columns={columns}
@@ -147,6 +137,7 @@ const Page = () => {
           onUpdate={handleAddUser}
         />
       </div>
+      </Card>
   );
 };
 
