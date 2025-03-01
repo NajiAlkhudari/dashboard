@@ -23,7 +23,6 @@ const Page = () => {
   const [userDataToUpdate, setUserDataToUpdate] = useState(null);
   const hasPermission = useHasPermission(Permissions.IsAdmin);
 
-  console.log('premisiition is', hasPermission);
   
   useEffect(() => {
     dispatch(fetchUsers());
@@ -34,7 +33,8 @@ const Page = () => {
       if (!userIdToDelete) return;
       const isDeleted = await deleteUser(userIdToDelete);
       if (isDeleted) {
-        dispatch(fetchUsers());
+        // تحديث قائمة المستخدمين
+        await dispatch(fetchUsers());
       }
     } catch (error) {
       console.error('Error deleting user:', error);
@@ -43,6 +43,7 @@ const Page = () => {
       setUserIdToDelete(null);
     }
   };
+  
 
   const handleUpdate = async (updatedData) => {
     try {
@@ -93,8 +94,7 @@ const Page = () => {
   ];
 
   return (
-   <Card>
-     
+
       <div className="p-6">
         <div className="flex flex-row justify-between">
           <h1 className="text-2xl font-bold mb-4">Users Table</h1>
@@ -108,7 +108,7 @@ const Page = () => {
           )}
         </div>
 
-          <Table
+          {/* <Table
             data={users}
             columns={columns}
             onDelete={hasPermission ? (id) => {
@@ -116,8 +116,16 @@ const Page = () => {
               setIsModalOpen(true);
             } : null}
             onUpdate={hasPermission ? openModalUpdate : null}
-          />
-   
+          /> */}
+     <Table
+  data={users} 
+  columns={columns}
+  onDelete={(id) => {
+    setUserIdToDelete(id);
+    setIsModalOpen(true);
+  }}
+  onUpdate={openModalUpdate}
+/>
 
         <DeleteUserModal
           isOpen={isModalOpen}
@@ -139,7 +147,7 @@ const Page = () => {
           onUpdate={handleAddUser}
         />
       </div>
-</Card>  );
+  );
 };
 
 export default withPermission(Page, Permissions.IsAdmin);

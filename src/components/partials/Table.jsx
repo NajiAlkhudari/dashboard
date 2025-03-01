@@ -1,3 +1,59 @@
+// import React from 'react';
+
+// const Table = ({ data, columns, onDelete , onUpdate }) => {
+//   return (
+//     <div className="overflow-x-auto">
+//       <table className="min-w-full bg-white border border-gray-300">
+//         <thead>
+//           <tr className="bg-gray-900">
+//             {columns.map((column, index) => (
+//               <th key={index} className="py-2 px-4 text-left text-sm font-semibold text-white">
+//                 {column.header}
+//               </th>
+//             ))}
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {data.map((row, rowIndex) => (
+//             <tr key={rowIndex} className="border-t border-gray-200">
+//               {columns.map((column, colIndex) => (
+//                 <td key={colIndex} className="py-2 px-4 text-sm text-gray-950">
+//                   {column.key === 'action' ? (
+//                     <div className='space-x-2'>
+
+                  
+//                     <button
+//                       className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
+//                       onClick={() => onDelete(row.id)} 
+//                     >
+//                       Delete
+//                     </button>
+
+//                     <button
+//                       className="bg-sky-800 text-white px-3 py-1 rounded-md hover:bg-sky-950"
+//                       onClick={() => onUpdate(row.id)} 
+//                     >
+//                       Update
+//                     </button>
+//                     </div>
+//                   ) : (
+//                     row[column.key]
+//                   )}
+//                 </td>
+//               ))}
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+//     </div>
+//   );
+// };
+
+// export default Table;
+
+
+
+
 import React from 'react';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";

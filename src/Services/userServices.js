@@ -33,8 +33,8 @@ try {
     },
   });
 
-  if (response.status === 200 || response.status === 204) {
-    fetchUsers();
+  if (response.status === 200) {
+    return true;
   } else {
     throw new Error('Failed to delete user');
   }
