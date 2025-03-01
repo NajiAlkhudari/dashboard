@@ -61,22 +61,22 @@ const Header = () => {
     <Sidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)}>
       <p className="text-center p-4 text-2xl font-bold">TU-VPN</p>
       <NavMenu title="Menu">
-        <SubMenu
+        {/* <SubMenu
           label="Products"
           icon={AiOutlineProduct}
           subItems={[
-            { label: "All Product", path: "/" },
-            { label: "Add New Product", path: "/" },
+            { label: "All Product", path: "/dashboard" },
+            { label: "Add New Product", path: "/dashboard" },
             { label: "Product Appear", path: "/" }
           ]}
           onClick={handleSidebarItemClick}
-        />
+        /> */}
         <SubMenu
           label="Reports"
           icon={TbReportAnalytics}
           subItems={[
-            { label: "Sales", path: "/dashboard" },
-            { label: "Purchases", path: "/dashboard" }
+            { label: "Supscriptions", path: "/dashboard" },
+            { label: "agents", path: "/dashboard" }
           ]}
           onClick={handleSidebarItemClick}
         />

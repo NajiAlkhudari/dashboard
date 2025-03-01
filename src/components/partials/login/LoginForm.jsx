@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { login } from '@/store/authSlice';
 import Button from '@/components/ui/Button';
 import TextInput from '@/components/ui/TextInput/TextInput';
+import { ToastContainer, toast } from 'react-toastify';
 
 const LoginForm = () => {
   const [userName, setUserName] = useState('');
@@ -13,6 +14,8 @@ const LoginForm = () => {
   const router = useRouter();
   const { loading, token, success, error } = useSelector((state) => state.auth);
 
+
+  
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ userName, password }));
@@ -20,11 +23,38 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (success) {
+      toast.success('Login Succsess', {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
       router.push("/dashboard");
     }
-  }, [token, router]);
+    if (error) {
+      toast.error(`Login Failed : ${error}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
+
+
+    }
+  }, [ error,success,token, router]);
+
+
 
   return (
+    <>
     <form className='space-y-2' onSubmit={onSubmit}>
       <div>
         <label className='text-sm'>UserName</label>
@@ -50,8 +80,10 @@ const LoginForm = () => {
       <Button type="submit">        
         {loading ? 'Signing in...' : 'Sign In'}
       </Button>
-      {error && <p className="text-red-500 text-sm">{error}</p>}
     </form>
+          <ToastContainer />
+          </>
+
   );
 };
 

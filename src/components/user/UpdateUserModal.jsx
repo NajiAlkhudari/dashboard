@@ -42,7 +42,7 @@ const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="sm:flex sm:items-start">
+      <div className="sm:flex sm:items-center px-12">
         <div className="mt-3 text-center sm:mt-0 sm:text-left">
           <h3 className="text-lg leading-6 font-medium text-gray-900">Update User</h3>
           <div className="mt-2 space-y-4">
@@ -68,13 +68,13 @@ const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Password</label>
-              <TextInput
+              <input
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Leave blank to keep current password"
-                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3  border-b-4  border-gray-700 rounded-md  focus:outline-none  focus:border-sky-700 "  
+                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 w-full sm:w-80 md:w-96 lg:w-128   border-b-4  border-gray-700 rounded-md  focus:outline-none  focus:border-sky-700 "  
               />
             </div>
             <div>

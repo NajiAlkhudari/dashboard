@@ -52,7 +52,7 @@ const Page = () => {
           <MdOutlineRealEstateAgent size={70} />
 
           </div>
-        <Button onClick={() => handleNavigate("/")}>
+        <Button onClick={() => handleNavigate("/dashboard")}>
           View
         </Button>
         <p className="text-gray-700 text-center">
@@ -67,7 +67,7 @@ const Page = () => {
         <BsFillBuildingsFill size={70} />
 
         </div>
-        <Button onClick={() => handleNavigate("/")}>
+        <Button onClick={() => handleNavigate("/dashboard")}>
           View
         </Button>
         <p className="text-gray-700 text-center">
@@ -76,13 +76,13 @@ const Page = () => {
       </Card>
       <Card
         title="Supscriptions Management"
-        className="  border border-1 bg-yellow-100 border-dashed  border-black p-6"
+        className="  border border-1 bg-orange-100-100 border-dashed  border-black p-6"
         > 
                   <div className="flex text-center justify-center text-orange-300">
                     <MdSubscriptions size={70} />
 </div>
-        <Button onClick={() => handleNavigate("/")}>
-          View
+<Button onClick={() => handleNavigate("/dashboard")}>
+View
         </Button>
 
         <p className="text-gray-700 text-center">

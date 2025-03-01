@@ -25,7 +25,7 @@ const TextInput = ({
         <input
           className={`border border-gray-500 focus:border-sky-900 ${
             error ? "has-error border border-red-600" : ""
-          } px-2 py-2 w-full sm:w-80 md:w-96 lg:w-128 rounded-md ${className}`}
+          } px-2 py-2 w-full sm:w-96 md:w-96 lg:w-128 rounded-md ${className}`}
           value={value}
           onChange={onChange}
           placeholder={placeholder}
