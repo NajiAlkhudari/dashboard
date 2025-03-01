@@ -1,7 +1,11 @@
-"use client";
+"use client"
+
+
 import React, { useState, useEffect } from 'react';
 import Modal from '@/components/ui/Modal';
 import TextInput from '../ui/TextInput/TextInput';
+import ComboBox from '../ui/ComboBox';
+import { permissionOptions } from '@/app/utils/permissionOptions';
 
 const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
   const [formData, setFormData] = useState({
@@ -40,6 +44,15 @@ const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
     onUpdate(updatedData);
   };
 
+
+
+  const handleSelect = (selectedPermission) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      userPermissions: selectedPermission.toString(),
+    }));
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="sm:flex sm:items-center px-12">
@@ -53,7 +66,7 @@ const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3  border-b-4  border-gray-700 rounded-md  focus:outline-none  focus:border-sky-700 "  
+                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
               />
             </div>
             <div>
@@ -63,7 +76,7 @@ const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
                 name="notes"
                 value={formData.notes}
                 onChange={handleChange}
-                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3  border-b-4  border-gray-700 rounded-md  focus:outline-none  focus:border-sky-700 "  
+                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
               />
             </div>
             <div>
@@ -74,17 +87,15 @@ const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Leave blank to keep current password"
-                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 w-full sm:w-80 md:w-96 lg:w-128   border-b-4  border-gray-700 rounded-md  focus:outline-none  focus:border-sky-700 "  
+                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 w-full sm:w-80 md:w-96 lg:w-128 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Permissions</label>
-              <TextInput
-                type="number"
-                name="userPermissions"
-                value={formData.userPermissions}
-                onChange={handleChange}
-                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3  border-b-4  border-gray-700 rounded-md  focus:outline-none  focus:border-sky-700 "  
+              <ComboBox
+                options={permissionOptions}
+                placeholder="Select Permissions"
+                onSelect={handleSelect}
               />
             </div>
           </div>

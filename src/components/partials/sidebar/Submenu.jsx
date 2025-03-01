@@ -12,7 +12,13 @@ const SubMenu = ({ label, icon: Icon, subItems, onClick }) => {
   return (
     <div>
       <div
-        onClick={toggleSubMenu}
+        onClick={() => {
+          if (onClick && !subItems) {
+            onClick();  // تأكد أن `onClick` تستدعى هنا بشكل صحيح
+          } else {
+            toggleSubMenu();
+          }
+        }}
         className="flex items-center cursor-pointer px-4 py-2 hover:bg-gray-300 rounded"
       >
         {Icon && <Icon className="mr-3 text-xl" />}
@@ -40,5 +46,4 @@ const SubMenu = ({ label, icon: Icon, subItems, onClick }) => {
     </div>
   );
 };
-
 export default SubMenu;

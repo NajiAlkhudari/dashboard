@@ -1,3 +1,6 @@
+
+
+
 "use client";
 import React from "react";
 import { FaRegCircleDot } from "react-icons/fa6";
@@ -11,10 +14,11 @@ const Sidebar = ({ isOpen, onClose, children }) => {
     >
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 text-gray-900 "
+        className="absolute top-4 right-4 text-gray-900"
       >
         <FaRegCircleDot />
       </button>
+
       {children}
     </div>
   );
