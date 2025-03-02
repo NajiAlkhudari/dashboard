@@ -1,33 +1,41 @@
-
-
 "use client";
-import { useRouter } from "next/navigation";
- import { useState, useEffect } from "react";
 
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { BsFillBuildingsFill } from "react-icons/bs";
+import { FaRegUserCircle, FaRegUser } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { AiOutlineAlignCenter } from "react-icons/ai";
-import { TbReportAnalytics } from "react-icons/tb";
+import { AiOutlineAlignCenter, AiOutlineProduct } from "react-icons/ai";
 import NavMenu from "@/components/partials/sidebar/NavMenu";
 import SubMenu from "@/components/partials/sidebar/Submenu";
 import Sidebar from "@/components/partials/sidebar/Sidebar";
-import { AiOutlineProduct } from "react-icons/ai";
 import { detail } from "@/store/meSlice";
-import { FaRegUser } from "react-icons/fa";
-
 import { Permissions, useHasPermission } from "@/app/utils/Permissions";
 
 const Header = ({ isSidebarOpen, onSidebarToggle }) => {
   const hasPermission = useHasPermission(Permissions.IsAdmin);
+  const viewCompanies = useHasPermission(Permissions.CanReadCompany);
+
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const { name } = useSelector((state) => state.me);
+  const { name, success } = useSelector((state) => state.me);
 
   const handleSidebarItemClick = (path) => {
     if (path) {
       router.push(path);
-      onSidebarToggle(false); 
+      onSidebarToggle(false);
     }
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+
+  const navigateToLogin = () => {
+    router.push("/unauthorize");  
   };
 
   useEffect(() => {
@@ -50,11 +58,48 @@ const Header = ({ isSidebarOpen, onSidebarToggle }) => {
           Dashboard
         </div>
 
-        <div>
-          <p className="hidden md:block text-gray-950 text-xl font-semibold font-sans">
-            Welcome {name}
-          </p>
-        </div>
+        <nav className="hidden sm:flex items-center space-x-4 text-sm sm:text-base lg:text-lg text-black">
+          <div className="border-l border-gray-600 h-6"></div>
+          <div className="flex space-x-2">
+            {success ? (
+              <div className="relative">
+                <button
+                  className="text-gray-800 flex items-center"
+                  onClick={toggleDropdown}
+                >
+              welcome    {name} <span className="ml-2">&#x25BC;</span>
+                </button>
+                {isDropdownOpen && (
+                  <div className="absolute bg-white shadow-lg rounded-md mt-2 w-32 z-10">
+                    <button
+                      className="block w-full text-center text-gray-950 px-4 py-2 text-sm"
+                      onClick={navigateToLogin}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="relative">
+                <button className="text-gray-800 flex items-center" onClick={toggleDropdown}>
+                  Account
+                </button>
+                {isDropdownOpen && (
+                  <div className="absolute bg-white shadow-lg rounded-md mt-2 w-32 z-10">
+                    <button
+                      className="block w-full text-center text-gray-950 px-4 py-2 text-sm"
+                      onClick={navigateToLogin}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+          <div className="border-l border-gray-600 h-6"></div>
+        </nav>
       </div>
 
       <Sidebar isOpen={isSidebarOpen} onClose={() => onSidebarToggle(false)}>
@@ -67,21 +112,18 @@ const Header = ({ isSidebarOpen, onSidebarToggle }) => {
               onClick={() => handleSidebarItemClick("/dashboard/manage-user")}
             />
           )}
+          {viewCompanies && (
+   <SubMenu
+   label="Companies"
+   icon={BsFillBuildingsFill}
+   onClick={() => handleSidebarItemClick("/dashboard/manage-companies")} 
+ />
+          )}
+       
           <SubMenu
             label="Agents"
             icon={AiOutlineProduct}
-            subItems={[
-              { label: "Add New agents", path: "/dashboard" },
-            ]}
-            onClick={handleSidebarItemClick}
-          />
-          <SubMenu
-            label="Reports"
-            icon={TbReportAnalytics}
-            subItems={[
-              { label: "Subscriptions", path: "/dashboard" },
-              { label: "Agents", path: "/dashboard" },
-            ]}
+            subItems={[{ label: "Add New agents", path: "/dashboard" }]}
             onClick={handleSidebarItemClick}
           />
         </NavMenu>

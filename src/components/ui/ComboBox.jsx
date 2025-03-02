@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ComboBox = ({ options = [], onSelect, placeholder }) => {
+const ComboBox = ({ options = [], onSelect, placeholder, clearOnSelect }) => {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,9 +28,12 @@ const ComboBox = ({ options = [], onSelect, placeholder }) => {
                 key={index}
                 className="p-2 cursor-pointer hover:bg-blue-100"
                 onClick={() => {
-                  setQuery(option.label);
+                  setQuery(option.label); 
                   setIsOpen(false);
-                  onSelect(option.value);
+                  onSelect(option.value); 
+                  if (clearOnSelect) {
+                    setQuery("");
+                  }
                 }}
               >
                 {option.label}

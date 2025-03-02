@@ -33,7 +33,6 @@ const Page = () => {
       if (!userIdToDelete) return;
       const isDeleted = await deleteUser(userIdToDelete);
       if (isDeleted) {
-        // تحديث قائمة المستخدمين
         await dispatch(fetchUsers());
       }
     } catch (error) {

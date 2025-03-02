@@ -67,7 +67,7 @@ const Page = () => {
         <BsFillBuildingsFill size={70} />
 
         </div>
-        <Button onClick={() => handleNavigate("/dashboard")}>
+        <Button onClick={() => handleNavigate("/dashboard/manage-companies")}>
           View
         </Button>
         <p className="text-gray-700 text-center">
