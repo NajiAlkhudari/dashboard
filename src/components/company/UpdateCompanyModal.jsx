@@ -2,27 +2,33 @@
 import React, { useState, useEffect } from 'react';
 import Modal from '@/components/ui/Modal';
 import TextInput from '../ui/TextInput/TextInput';
-import ComboBox from '../ui/ComboBox';
-import { permissionOptions } from '@/app/utils/permissionOptions';
+
 
 const UpdateCompanyModal = ({ isOpen, onClose, onUpdate, initialData }) => {
   const [formData, setFormData] = useState({
-    name: '',
-    notes: '',
-    password: '',
-    userPermissions: '',
+    name: "",
+    phone: "",
+    managerName: "",
+    address: "",
+    networkDomain: "",
+    notes: "",
   });
 
   useEffect(() => {
     if (initialData) {
+      console.log("initialData:", initialData);
+
       setFormData({
-        name: initialData.name || '',
-        notes: initialData.notes || '',
-        password: '', 
-        userPermissions: initialData.userPermissions?.toString() || '',
+        name : initialData.name || '',
+        phone : initialData.phone || '',
+        managerName : initialData.managerName || '',
+        address : initialData.address || '',
+        networkDomain : initialData.networkDomain || '',
+        notes : initialData.notes || '',
       });
     }
   }, [initialData]);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,69 +40,87 @@ const UpdateCompanyModal = ({ isOpen, onClose, onUpdate, initialData }) => {
 
   const handleSubmit = () => {
     const updatedData = {
-      name: formData.name,
-      notes: formData.notes,
-      password: formData.password,
-      userPermissions: parseInt(formData.userPermissions, 10),
+      name : formData.name ,
+        phone : formData.phone ,
+        managerName : formData.managerName,
+        address : formData.address,
+        networkDomain : formData.networkDomain,
+        notes : formData.notes ,
     };
     onUpdate(updatedData);
   };
 
 
 
-  const handleSelect = (selectedPermission) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      userPermissions: selectedPermission.toString(),
-    }));
-  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="sm:flex sm:items-center px-12">
         <div className="mt-3 text-center sm:mt-0 sm:text-left">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">Update User</h3>
+          <h3 className="text-lg leading-6 font-medium text-gray-900">Update Company</h3>
           <div className="mt-2 space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Name</label>
-              <TextInput
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Notes</label>
-              <TextInput
-                type="text"
-                name="notes"
-                value={formData.notes}
-                onChange={handleChange}
-                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Password</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Leave blank to keep current password"
-                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 w-full sm:w-80 md:w-96 lg:w-128 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Permissions</label>
-              <ComboBox
-                options={permissionOptions}
-                placeholder="Select Permissions"
-                onSelect={handleSelect}
-              />
-            </div>
-          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Name</label>
+            <TextInput 
+            name="name"
+            type="text"
+            value={formData.name || ""}
+            onChange={handleChange}
+            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
+             />
+             </div>
+             <div>
+            <label className="block text-sm font-medium text-gray-700">phone</label>
+            <TextInput 
+            name="phone"
+            type="number"
+            value={formData.phone || ""}
+            onChange={handleChange}
+            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
+             />
+             </div>
+                   <div>
+            <label className="block text-sm font-medium text-gray-700">managerName</label>
+            <TextInput 
+            name="managerName"
+            type="text"
+            value={formData.managerName || ""}
+            onChange={handleChange}
+            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
+             />
+             </div>
+             <div>
+            <label className="block text-sm font-medium text-gray-700">Address</label>
+            <TextInput 
+            name="address"
+            type="text"
+            value={formData.address || ""}
+            onChange={handleChange}
+            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
+             />
+             </div>
+             <div>
+            <label className="block text-sm font-medium text-gray-700">networkDomain</label>
+            <TextInput 
+            name="networkDomain"
+            type="text"
+            value={formData.networkDomain || ""}
+            onChange={handleChange}
+            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
+             />
+             </div>
+
+             <div>
+            <label className="block text-sm font-medium text-gray-700">Notes</label>
+            <TextInput 
+            name="notes"
+            type="text"
+            value={formData.notes || ""}
+            onChange={handleChange}
+            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
+             />
+           </div>
+           </div>
         </div>
       </div>
       <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">

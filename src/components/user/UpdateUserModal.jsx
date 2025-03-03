@@ -17,6 +17,8 @@ const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
 
   useEffect(() => {
     if (initialData) {
+      console.log("initialData:", initialData);
+
       setFormData({
         name: initialData.name || '',
         notes: initialData.notes || '',

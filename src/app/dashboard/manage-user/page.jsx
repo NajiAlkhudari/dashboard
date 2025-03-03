@@ -1,16 +1,20 @@
-
 "use client";
-import React, { useEffect, useState } from 'react';
-import { deleteUser, updateUser, fetchUserById, postUser } from '@/Services/userServices';
-import Table from '@/components/partials/Table';
-import DeleteUserModal from '@/components/user/DeleteUserModal';
-import UpdateUserModal from '@/components/user/UpdateUserModal';
-import AddUserModal from '@/components/user/PostUserModal';
-import { fetchUsers } from '@/store/userSlice';
-import { Permissions , useHasPermission } from '@/app/utils/Permissions';
-import { useDispatch, useSelector } from 'react-redux';
-import Card from '@/components/ui/Card';
-import withPermission from '@/app/utils/withPermission';
+import React, { useEffect, useState } from "react";
+import {
+  deleteUser,
+  updateUser,
+  fetchUserById,
+  postUser,
+} from "@/Services/userServices";
+import Table from "@/components/partials/Table";
+import DeleteUserModal from "@/components/user/DeleteUserModal";
+import UpdateUserModal from "@/components/user/UpdateUserModal";
+import AddUserModal from "@/components/user/PostUserModal";
+import { fetchUsers } from "@/store/userSlice";
+import { Permissions, useHasPermission } from "@/app/utils/Permissions";
+import { useDispatch, useSelector } from "react-redux";
+import Card from "@/components/ui/Card";
+import withPermission from "@/app/utils/withPermission";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -23,7 +27,6 @@ const Page = () => {
   const [userDataToUpdate, setUserDataToUpdate] = useState(null);
   const hasPermission = useHasPermission(Permissions.IsAdmin);
 
-  
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
@@ -36,13 +39,12 @@ const Page = () => {
         await dispatch(fetchUsers());
       }
     } catch (error) {
-      console.error('Error deleting user:', error);
+      console.error("Error deleting user:", error);
     } finally {
       setIsModalOpen(false);
       setUserIdToDelete(null);
     }
   };
-  
 
   const handleUpdate = async (updatedData) => {
     try {
@@ -52,7 +54,7 @@ const Page = () => {
         dispatch(fetchUsers());
       }
     } catch (error) {
-      console.error('Error updating user:', error);
+      console.error("Error updating user:", error);
     } finally {
       setIsModalOpenUpdate(false);
       setUserIdToUpdate(null);
@@ -67,7 +69,7 @@ const Page = () => {
         dispatch(fetchUsers());
       }
     } catch (error) {
-      console.error('Error adding user:', error);
+      console.error("Error adding user:", error);
     } finally {
       setIsModalOpenAdd(false);
     }
@@ -76,24 +78,25 @@ const Page = () => {
   const openModalUpdate = async (id) => {
     try {
       const userData = await fetchUserById(id);
+      console.log(' USER DATA', userData)
       setUserDataToUpdate(userData);
       setUserIdToUpdate(id);
       setIsModalOpenUpdate(true);
     } catch (error) {
-      console.error('Error fetching user data for update:', error);
+      console.error("Error fetching user data for update:", error);
     }
   };
 
   const columns = [
-    { header: 'ID', key: 'id' },
-    { header: 'Name', key: 'name' },
-    { header: 'Notes', key: 'notes' },
-    { header: 'Permissions', key: 'userPermissions' },
-    { header: 'Action', key: 'action' },
+    { header: "ID", key: "id" },
+    { header: "Name", key: "name" },
+    { header: "Notes", key: "notes" },
+    { header: "Permissions", key: "userPermissions" },
+    { header: "Action", key: "action" },
   ];
 
   return (
-<Card>
+    <Card>
       <div className="p-6">
         <div className="flex flex-row justify-between">
           <h1 className="text-2xl font-bold mb-4">Users Table</h1>
@@ -106,15 +109,15 @@ const Page = () => {
             </button>
           )}
         </div>
-     <Table
-  data={users} 
-  columns={columns}
-  onDelete={(id) => {
-    setUserIdToDelete(id);
-    setIsModalOpen(true);
-  }}
-  onUpdate={openModalUpdate}
-/>
+        <Table
+          data={users}
+          columns={columns}
+          onDelete={(id) => {
+            setUserIdToDelete(id);
+            setIsModalOpen(true);
+          }}
+          onUpdate={openModalUpdate}
+        />
 
         <DeleteUserModal
           isOpen={isModalOpen}
@@ -136,7 +139,7 @@ const Page = () => {
           onUpdate={handleAddUser}
         />
       </div>
-      </Card>
+    </Card>
   );
 };
 

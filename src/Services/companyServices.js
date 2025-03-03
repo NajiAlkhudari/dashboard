@@ -47,10 +47,10 @@ export const fetchCompanyById = async (id) => {
       }
     );
     if (response.status != 200) {
-      console.error(`Failed to fetch user, Status: ${response.status}`);
+      console.error(`Failed to fetch company, Status: ${response.status}`);
       return null;
     }
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error("Error to Fetch Company by Id", error.message);
     return null;
