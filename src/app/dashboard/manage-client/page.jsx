@@ -4,7 +4,7 @@ import { useDispatch , useSelector } from 'react-redux';
 import Table from '@/components/partials/Table';
 import { fetchClient , postClient } from '@/store/clientSlice';
 import Loading from './loading';
-import Error from './error';
+// import Error from './error';
 import PostClientModal from '@/components/client/PostClientModal';
 
   const Page =() => {
@@ -45,11 +45,11 @@ import PostClientModal from '@/components/client/PostClientModal';
         <Loading />
         );
       }
-      if (error) {
-        return (
-        <Error error={error} />
-        );
-      }
+      // if (error) {
+      //   return (
+      //   <Error error={error} />
+      //   );
+      // }
     
   return (
     <div>
