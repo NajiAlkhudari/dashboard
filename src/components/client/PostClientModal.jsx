@@ -96,7 +96,7 @@ import React, { useState, useEffect } from 'react';
 
 import { fetchCompanies } from '@/Services/companyServices';
 import Modal from '../ui/Modal';
-import TextInput from '../ui/TextInput/TextInput';
+import TextInputForm from '../ui/TextInput/TextInputForm';
 import ComboBox from '../ui/ComboBox';
 
 const PostClientModal = ({ isOpen, onClose, onUpdate }) => {
@@ -165,30 +165,27 @@ const PostClientModal = ({ isOpen, onClose, onUpdate }) => {
                     <h3 className="text-lg leading-6 font-medium text-gray-900">Add Client</h3>
                     <div className="mt-2 space-y-4">
                         <label className="block text-sm font-medium text-gray-700">Name</label>
-                        <TextInput
+                        <TextInputForm
                             type="text"
                             name="name"
                             value={clientData.name}
                             onChange={handleChange}
-                            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
                         />
 
                         <label className="block text-sm font-medium text-gray-700">Phone</label>
-                        <TextInput
+                        <TextInputForm
                             type="text"
                             name="phone"
                             value={clientData.phone}
                             onChange={handleChange}
-                            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
                         />
 
                         <label className="block text-sm font-medium text-gray-700">Prefix</label>
-                        <TextInput
+                        <TextInputForm
                             type="text"
                             name="prefex"
                             value={clientData.prefex}
                             onChange={handleChange}
-                            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
                         />
 
                         <label className="block text-sm font-medium text-gray-700">Company</label>

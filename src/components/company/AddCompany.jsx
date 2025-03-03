@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../ui/Modal";
-import TextInput from "../ui/TextInput/TextInput";
+import TextInputForm from "../ui/TextInput/TextInputForm";
 
 const AddCompany = ({ isOpen, onClose, onUpdate }) => {
   const [formData, setFormData] = useState({
@@ -41,63 +41,57 @@ const AddCompany = ({ isOpen, onClose, onUpdate }) => {
             </div>
             <div>
             <label className="block text-sm font-medium text-gray-700">Name</label>
-            <TextInput 
+            <TextInputForm
             name="name"
             type="text"
             value={formData.name}
             onChange={handleChange}
-            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
              />
              </div>
              <div>
             <label className="block text-sm font-medium text-gray-700">phone</label>
-            <TextInput 
+            <TextInputForm 
             name="phone"
             type="number"
             value={formData.phone}
             onChange={handleChange}
-            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
              />
              </div>
                    <div>
             <label className="block text-sm font-medium text-gray-700">managerName</label>
-            <TextInput 
+            <TextInputForm 
             name="managerName"
             type="text"
             value={formData.managerName}
             onChange={handleChange}
-            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
              />
              </div>
              <div>
             <label className="block text-sm font-medium text-gray-700">Address</label>
-            <TextInput 
+            <TextInputForm 
             name="address"
             type="text"
             value={formData.address}
             onChange={handleChange}
-            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
              />
              </div>
              <div>
             <label className="block text-sm font-medium text-gray-700">networkDomain</label>
-            <TextInput 
+            <TextInputForm 
             name="networkDomain"
             type="text"
             value={formData.networkDomain}
             onChange={handleChange}
-            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
              />
              </div>
 
              <div>
             <label className="block text-sm font-medium text-gray-700">Notes</label>
-            <TextInput 
+            <TextInputForm 
             name="notes"
             type="text"
             value={formData.notes}
             onChange={handleChange}
-            className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
              />
              </div>
 

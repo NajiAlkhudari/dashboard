@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Modal from '@/components/ui/Modal';
-import TextInput from '../ui/TextInput/TextInput';
 import ComboBox from '../ui/ComboBox';
 import { permissionOptions } from '@/app/utils/permissionOptions';
+import TextInputForm from '../ui/TextInput/TextInputForm';
 
 const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
   const [formData, setFormData] = useState({
@@ -78,33 +78,30 @@ const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
           <div className="mt-2 space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700">Name</label>
-              <TextInput
+              <TextInputForm
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Notes</label>
-              <TextInput
+              <TextInputForm
                 type="text"
                 name="notes"
                 value={formData.notes}
                 onChange={handleChange}
-                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Password</label>
-              <input
+              <TextInputForm
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Leave blank to keep current password"
-                className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 w-full sm:w-80 md:w-96 lg:w-128 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
               />
             </div>
             <div>

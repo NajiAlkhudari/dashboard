@@ -15,7 +15,7 @@ const ComboBox = ({ options = [], onSelect, placeholder, clearOnSelect }) => {
       <input
         type="text"
         placeholder={placeholder}
-        className="bg-gray-300 text-gray-600 mt-1 block py-2 px-3 border-b-4 border-gray-700 rounded-md focus:outline-none focus:border-sky-700"
+        className=" bg-slate-100 text-gray-950 mt-1 block py-2 px-3 w-full sm:w-80 md:w-96 lg:w-128  rounded-md border-b-4   border-gray-200 focus:outline-none focus:border-sky-700"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onFocus={() => setIsOpen(true)}
