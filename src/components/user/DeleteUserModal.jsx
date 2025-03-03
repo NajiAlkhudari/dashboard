@@ -4,13 +4,13 @@ import Modal from '@/components/ui/Modal';
 
 const DeleteUserModal = ({ isOpen, onClose, onDelete }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} title="Confirm Delete">
       <div className="sm:flex sm:items-start">
         <div className="mt-3 text-center sm:mt-0 sm:text-left">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">Confirm Delete</h3>
+          <h3 className="text-lg leading-6 font-medium text-gray-900"> Are you sure</h3>
           <div className="mt-2">
             <p className="text-sm text-gray-500">
-              Are you sure you want to delete this user? This action cannot be undone.
+              you want to delete this user? This action cannot be undone.
             </p>
           </div>
         </div>

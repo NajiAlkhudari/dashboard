@@ -3,7 +3,6 @@ import Table from "@/components/partials/Table";
 import Card from "@/components/ui/Card";
 import {
   deleteCompany,
-  fetchCompanies,
   fetchCompanyById,
   postCompany,
   UpdateCompany,
@@ -12,9 +11,12 @@ import AddCompany from "@/components/company/AddCompany";
 import React, { useState, useEffect } from "react";
 import DeleteCompnayModal from "@/components/company/DeleteCompnayModal";
 import UpdateCompanyModal from "@/components/company/UpdateCompanyModal";
+import { useDispatch, useSelector } from "react-redux";
+import { getCompanies } from "@/store/companySlice";
 
 const Page = () => {
-  const [company, setCompany] = useState([]);
+    const dispatch = useDispatch();
+    const { companies, loading, error } = useSelector((state) => state.companies);
   const [isModalOpenAdd, setIsModalOpenAdd] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpenUpdate, setIsModalOpenUpdate] = useState(false);
@@ -23,20 +25,18 @@ const Page = () => {
   const [companyIdToDelete, setCompanyIdToDelete] = useState(null);
   const [companyIdToUpdate, setCompanyIdToUpdate] = useState(null);
 
-  useEffect(() => {
-    const getData = async () => {
-      const data = await fetchCompanies();
-      setCompany(data);
-    };
-    getData();
-  }, []);
+
+
+   useEffect(() => {
+      dispatch(getCompanies());
+    }, [dispatch]);
 
   const handleAddCompany = async (newCompanyData) => {
     try {
       const isAdded = await postCompany(newCompanyData);
       if (isAdded) {
-        const updatedCompanies = await fetchCompanies();
-        setCompany(updatedCompanies);
+                 await dispatch(getCompanies());
+
       }
     } catch (error) {
       console.error("Error adding company:", error);
@@ -50,8 +50,8 @@ const Page = () => {
       if (!companyIdToUpdate) return;
       const isUpdated = await UpdateCompany(companyIdToUpdate, updatedData);
       if (isUpdated) {
-        const updatedCompanies = await fetchCompanies();
-        setCompany(updatedCompanies);
+        await dispatch(getCompanies());
+
       }
     } catch (error) {
       console.error("Error updating company:", error);
@@ -76,10 +76,15 @@ const Page = () => {
   const handleConfirmDelete = async () => {
     try {
       if (!companyIdToDelete) return;
+      
+      console.log("Deleting company with ID:", companyIdToDelete);
+
       const isDeleted = await deleteCompany(companyIdToDelete);
+
+      console.log("Delete response:", isDeleted);
+
       if (isDeleted) {
-        const updatedCompanies = await fetchCompanies();
-        setCompany(updatedCompanies);
+        await dispatch(getCompanies());
       }
     } catch (error) {
       console.error("Error deleting company:", error);
@@ -87,7 +92,8 @@ const Page = () => {
       setIsModalOpen(false);
       setCompanyIdToDelete(null);
     }
-  };
+};
+
 
   const columns = [
     { header: "ID", key: "id" },
@@ -117,7 +123,7 @@ const Page = () => {
 
         <div>
           <Table
-            data={company}
+            data={companies}
             columns={columns}
             onDelete={(id) => {
               setCompanyIdToDelete(id);

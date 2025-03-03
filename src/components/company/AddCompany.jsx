@@ -33,10 +33,9 @@ const AddCompany = ({ isOpen, onClose, onUpdate }) => {
   };
 
   return(
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} title="New Company">
          <div className="sm:flex sm:items-center px-12 ">
         <div className="mt-3 text-center sm:mt-0 sm:text-left">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">New Company</h3>
           <div className="mt-2 space-y-4 ">
             </div>
             <div>
