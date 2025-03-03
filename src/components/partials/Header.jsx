@@ -11,10 +11,14 @@ import SubMenu from "@/components/partials/sidebar/Submenu";
 import Sidebar from "@/components/partials/sidebar/Sidebar";
 import { detail } from "@/store/meSlice";
 import { Permissions, useHasPermission } from "@/app/utils/Permissions";
+import { FaUserSecret } from "react-icons/fa";
+
 
 const Header = ({ isSidebarOpen, onSidebarToggle }) => {
   const hasPermission = useHasPermission(Permissions.IsAdmin);
   const viewCompanies = useHasPermission(Permissions.CanReadCompany);
+  const viewClient = useHasPermission(Permissions.CanReadClient);
+
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -119,7 +123,14 @@ const Header = ({ isSidebarOpen, onSidebarToggle }) => {
    onClick={() => handleSidebarItemClick("/dashboard/manage-companies")} 
  />
           )}
-       
+          {viewClient &&(
+          <SubMenu
+          label="Clients"
+          icon={FaUserSecret}
+          onClick={() => handleSidebarItemClick("/dashboard/manage-client")} 
+        />
+          )}
+
           <SubMenu
             label="Agents"
             icon={AiOutlineProduct}

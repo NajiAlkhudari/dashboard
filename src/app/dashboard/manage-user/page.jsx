@@ -15,6 +15,8 @@ import { Permissions, useHasPermission } from "@/app/utils/Permissions";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "@/components/ui/Card";
 import withPermission from "@/app/utils/withPermission";
+import Loading from "./loading";
+// import Error from "./error";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -95,6 +97,17 @@ const Page = () => {
     { header: "Action", key: "action" },
   ];
 
+
+  if (loading) {
+    return (
+    <Loading />
+    );
+  }
+  // if (error) {
+  //   return (
+  //   <Error error={error} />
+  //   );
+  // }
   return (
     <Card>
       <div className="p-6">
