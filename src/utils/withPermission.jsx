@@ -1,6 +1,6 @@
 "use client";
 import { useSelector } from "react-redux";
-import { Permissions } from "@/app/utils/Permissions";
+import { Permissions } from "@/utils/Permissions";
 
 const withPermission = (WrappedComponent, requiredPermission) => {
   return (props) => {

@@ -10,8 +10,9 @@ import NavMenu from "@/components/partials/sidebar/NavMenu";
 import SubMenu from "@/components/partials/sidebar/Submenu";
 import Sidebar from "@/components/partials/sidebar/Sidebar";
 import { detail } from "@/store/meSlice";
-import { Permissions, useHasPermission } from "@/app/utils/Permissions";
+import { Permissions, useHasPermission } from "@/utils/Permissions";
 import { FaUserSecret } from "react-icons/fa";
+import ThemeSwitcher from "../ThemeSwitcher";
 
 
 const Header = ({ isSidebarOpen, onSidebarToggle }) => {
@@ -49,26 +50,31 @@ const Header = ({ isSidebarOpen, onSidebarToggle }) => {
   }, [dispatch, name]);
 
   return (
-    <header className="sticky top-0 z-50 bg-white px-4 py-4">
+    <header className="sticky top-0 z-50 bg-gray-50 px-4 py-4 dark:bg-slate-800">
       <div className="container mx-auto flex justify-between items-center">
         <button
           onClick={() => onSidebarToggle(true)}
-          className="p-2 text-2xl text-gray-950 rounded-full hover:bg-gray-600"
+          className="p-2 text-2xl text-gray-800 dark:text-gray-50 rounded-full hover:bg-gray-600"
         >
           <AiOutlineAlignCenter />
         </button>
 
-        <div className="absolute left-1/2 transform -translate-x-1/2 text-3xl font-bold text-gray-800">
+        <div className="absolute left-1/2 transform -translate-x-1/2 text-3xl font-bold text-gray-800 dark:text-gray-50">
           Dashboard
         </div>
-
+      
         <nav className="hidden sm:flex items-center space-x-4 text-sm sm:text-base lg:text-lg text-black">
+        <div>
+          <ThemeSwitcher />
+        </div>
           <div className="border-l border-gray-600 h-6"></div>
+          
           <div className="flex space-x-2">
+          
             {success ? (
               <div className="relative">
                 <button
-                  className="text-gray-800 flex items-center"
+                  className="text-gray-800 dark:text-gray-50 flex items-center"
                   onClick={toggleDropdown}
                 >
               welcome    {name} <span className="ml-2">&#x25BC;</span>

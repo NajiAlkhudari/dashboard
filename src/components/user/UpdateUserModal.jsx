@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from '@/components/ui/Modal';
 import ComboBox from '../ui/ComboBox';
-import { permissionOptions } from '@/app/utils/permissionOptions';
+import { permissionOptions } from '@/utils/permissionOptions';
 import TextInputForm from '../ui/TextInput/TextInputForm';
 
 const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {

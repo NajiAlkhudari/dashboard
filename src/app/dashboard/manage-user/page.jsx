@@ -11,10 +11,10 @@ import DeleteUserModal from "@/components/user/DeleteUserModal";
 import UpdateUserModal from "@/components/user/UpdateUserModal";
 import AddUserModal from "@/components/user/PostUserModal";
 import { fetchUsers } from "@/store/userSlice";
-import { Permissions, useHasPermission } from "@/app/utils/Permissions";
+import { Permissions, useHasPermission } from "@/utils/Permissions";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "@/components/ui/Card";
-import withPermission from "@/app/utils/withPermission";
+import withPermission from "@/utils/withPermission";
 import Loading from "./loading";
 // import Error from "./error";
 
@@ -103,11 +103,7 @@ const Page = () => {
     <Loading />
     );
   }
-  // if (error) {
-  //   return (
-  //   <Error error={error} />
-  //   );
-  // }
+
   return (
     <Card>
       <div className="p-6">

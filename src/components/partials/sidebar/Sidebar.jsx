@@ -8,7 +8,7 @@ import { FaRegCircleDot } from "react-icons/fa6";
 const Sidebar = ({ isOpen, onClose, children }) => {
   return (
     <div
-      className={`fixed top-0 left-0 h-full bg-white text-gray-900 transition-transform transform ${
+      className={`fixed top-0 left-0 h-full bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-50 transition-transform transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } w-64 shadow-lg z-50`}
     >

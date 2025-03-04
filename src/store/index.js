@@ -3,7 +3,8 @@ import authReducer from './authSlice';
 import meReducer from './meSlice';
 import userReducer from './userSlice'
 import clientReducer from './clientSlice';
-import companyReducer from './companySlice'
+import companyReducer from './companySlice';
+import agentReducer from './agentSlice';
 const store = configureStore({
   reducer: {
     auth: authReducer, 
@@ -11,6 +12,7 @@ const store = configureStore({
      users : userReducer,
      clients : clientReducer,
      companies : companyReducer,
+     agents : agentReducer,
 
   },
 });

@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";  
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
-import { Permissions , useHasPermission } from '@/app/utils/Permissions';
+import { Permissions , useHasPermission } from '@/utils/Permissions';
 import { FaUsers } from "react-icons/fa6";
 import { BsFillBuildingsFill } from "react-icons/bs";
 import { MdOutlineRealEstateAgent } from "react-icons/md";

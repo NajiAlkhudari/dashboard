@@ -4,8 +4,8 @@ import { useDispatch , useSelector } from 'react-redux';
 import Table from '@/components/partials/Table';
 import { fetchClient , postClient } from '@/store/clientSlice';
 import Loading from './loading';
-// import Error from './error';
 import PostClientModal from '@/components/client/PostClientModal';
+// import Error from './error';
 
   const Page =() => {
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ import PostClientModal from '@/components/client/PostClientModal';
 
     const handleAddClient = async (clientData) => {
       try {
-        await dispatch(postClient(clientData));
+        await dispatch(postClient(clientData)).unwrap();
         setIsModalOpen(false); 
       } catch (error) {
         console.error("Failed to add client:", error);
@@ -28,6 +28,16 @@ import PostClientModal from '@/components/client/PostClientModal';
         dispatch(fetchClient())
     },[dispatch])
 
+    if (loading) {
+      return (
+      <Loading />
+      );
+    }
+    // if (error) {
+    //   return (
+    //   <Error />
+    //   );
+    // }
 
 
     const columns = [
@@ -45,11 +55,7 @@ import PostClientModal from '@/components/client/PostClientModal';
         <Loading />
         );
       }
-      // if (error) {
-      //   return (
-      //   <Error error={error} />
-      //   );
-      // }
+   
     
   return (
     <div>

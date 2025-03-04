@@ -9,10 +9,10 @@ const Layout = ({ children }) => {
 
   return (
     <div>
-      <Header
+      {/* <Header
         isSidebarOpen={isSidebarOpen}
         onSidebarToggle={(state) => setSidebarOpen(state)}
-      />
+      /> */}
 
       <Breadcrumbs />
 

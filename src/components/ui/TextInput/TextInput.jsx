@@ -8,6 +8,7 @@ const TextInput = ({
   className,
   label,
   name,
+  register,
   value,
   onChange,
   placeholder,
@@ -30,7 +31,7 @@ const TextInput = ({
           onChange={onChange}
           placeholder={placeholder}
           type={inputType} 
-          name={name}
+          {...register(name)} 
         />
         {type === "password" && (
           <button
