@@ -64,9 +64,9 @@ const Header = ({ isSidebarOpen, onSidebarToggle }) => {
         </div>
       
         <nav className="hidden sm:flex items-center space-x-4 text-sm sm:text-base lg:text-lg text-black">
-        <div>
+        {/* <div>
           <ThemeSwitcher />
-        </div>
+        </div> */}
           <div className="border-l border-gray-600 h-6"></div>
           
           <div className="flex space-x-2">
