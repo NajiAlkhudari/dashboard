@@ -13,6 +13,8 @@ import DeleteCompnayModal from "@/components/company/DeleteCompnayModal";
 import UpdateCompanyModal from "@/components/company/UpdateCompanyModal";
 import { useDispatch, useSelector } from "react-redux";
 import { getCompanies } from "@/store/companySlice";
+import { Permissions } from "@/utils/Permissions";
+import withPermission from "@/utils/withPermission";
 
 const Page = () => {
     const dispatch = useDispatch();
@@ -156,4 +158,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default withPermission(Page , Permissions.CanReadCompany) ; 

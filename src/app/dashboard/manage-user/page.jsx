@@ -11,12 +11,11 @@ import DeleteUserModal from "@/components/user/DeleteUserModal";
 import UpdateUserModal from "@/components/user/UpdateUserModal";
 import AddUserModal from "@/components/user/PostUserModal";
 import { fetchUsers } from "@/store/userSlice";
-import { Permissions, useHasPermission } from "@/utils/Permissions";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "@/components/ui/Card";
 import withPermission from "@/utils/withPermission";
 import Loading from "./loading";
-// import Error from "./error";
+import { Permissions } from "@/utils/Permissions";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -27,7 +26,6 @@ const Page = () => {
   const [userIdToDelete, setUserIdToDelete] = useState(null);
   const [userIdToUpdate, setUserIdToUpdate] = useState(null);
   const [userDataToUpdate, setUserDataToUpdate] = useState(null);
-  const hasPermission = useHasPermission(Permissions.IsAdmin);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -109,14 +107,14 @@ const Page = () => {
       <div className="p-6">
         <div className="flex flex-row justify-between">
           <h1 className="text-2xl font-bold mb-4">Users Table</h1>
-          {hasPermission && (
+         
             <button
               className="mb-4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-sky-900 text-base font-medium text-white hover:bg-sky-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
               onClick={() => setIsModalOpenAdd(true)}
             >
               Add User
             </button>
-          )}
+      
         </div>
         <Table
           data={users}

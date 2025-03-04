@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useEffect } from "react";
 import Modal from "../ui/Modal";
 import TextInputForm from "../ui/TextInput/TextInputForm";

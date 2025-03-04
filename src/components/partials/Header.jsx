@@ -19,7 +19,7 @@ const Header = ({ isSidebarOpen, onSidebarToggle }) => {
   const hasPermission = useHasPermission(Permissions.IsAdmin);
   const viewCompanies = useHasPermission(Permissions.CanReadCompany);
   const viewClient = useHasPermission(Permissions.CanReadClient);
-
+const viewAgent= useHasPermission(Permissions.CanReadAgent)
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -137,12 +137,14 @@ const Header = ({ isSidebarOpen, onSidebarToggle }) => {
         />
           )}
 
-          <SubMenu
-            label="Agents"
-            icon={AiOutlineProduct}
-            subItems={[{ label: "Add New agents", path: "/dashboard" }]}
-            onClick={handleSidebarItemClick}
-          />
+{viewAgent && (
+    <SubMenu
+    label="Agents"
+    icon={FaUserSecret}
+    onClick={() => handleSidebarItemClick("/dashboard/manage-agent")} 
+  />
+)}
+        
         </NavMenu>
       </Sidebar>
     </header>

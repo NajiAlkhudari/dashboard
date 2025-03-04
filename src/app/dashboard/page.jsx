@@ -14,6 +14,8 @@ const Page = () => {
     const hasPermission = useHasPermission(Permissions.IsAdmin);
     const viewCompanies = useHasPermission(Permissions.CanReadCompany);
     const viewClient = useHasPermission(Permissions.CanReadClient);
+    const viewAgent = useHasPermission(Permissions.CanReadAgent);
+
 
   const router = useRouter(); 
 
@@ -41,28 +43,28 @@ const Page = () => {
             <p className="text-gray-700 text-center">
               Manage users, assign roles, and modify permissions easily.
             </p>
-        
-
           </Card>
  )
 }
 
+{viewAgent &&(
+  <Card
+  title="Agents Management"
+  className="  border border-1 bg-purple-100 border-dashed  border-black p-6"
+  > 
+    <div className="flex text-center justify-center text-purple-300">
+    <MdOutlineRealEstateAgent size={70} />
 
-      <Card
-        title="Agents Management"
-        className="  border border-1 bg-purple-100 border-dashed  border-black p-6"
-        > 
-          <div className="flex text-center justify-center text-purple-300">
-          <MdOutlineRealEstateAgent size={70} />
-
-          </div>
-        <Button onClick={() => handleNavigate("/dashboard")}>
-          View
-        </Button>
-        <p className="text-gray-700 text-center">
-          Manage agents, edit details, and control business account settings.
-        </p>
-      </Card>
+    </div>
+  <Button onClick={() => handleNavigate("/dashboard/manage-agent")}>
+    View
+  </Button>
+  <p className="text-gray-700 text-center">
+    Manage agents, edit details, and control business account settings.
+  </p>
+</Card>
+)}
+    
 
       {viewCompanies && (
     <Card
