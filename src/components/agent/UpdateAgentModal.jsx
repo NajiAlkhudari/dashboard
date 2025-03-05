@@ -35,21 +35,7 @@ const handleChange = (e)=>{
 };
 
 const handleSubmit = () => {
-    const updatedData = {
-      name: agentData.name.trim() || "", 
-      phone: agentData.phone.trim() || "",
-      percentage: parseFloat(agentData.percentage) || 0, 
-      notes: agentData.notes.trim() || "",
-    };
-
-    console.log("Submitting updated agent data:", updatedData);
-
-    if (!updatedData.name || !updatedData.phone || isNaN(updatedData.percentage)) {
-      alert("Please fill all fields correctly");
-      return;
-    }
-
-    onUpdateAgent(updatedData); 
+    onUpdateAgent(agentData); 
 };
 
 return(

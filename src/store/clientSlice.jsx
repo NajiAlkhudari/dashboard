@@ -73,6 +73,34 @@ export const updateClient = createAsyncThunk(
   }
 );
 
+export const deleteClient = createAsyncThunk(
+  "clients/deleteClient",
+  async (id, { rejectWithValue }) => {
+    const token = Cookies.get("token");
+    try {
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/Client/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status === 200 || response.status === 204) {
+
+      return response.data.data;
+      }
+      else {
+        console.error(`Failed to delete client, Status: ${response.status}`);
+        return false;
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+
 const clientSlice = createSlice({
   name: "clients",
   initialState: {
@@ -123,7 +151,21 @@ const clientSlice = createSlice({
       .addCase(updateClient.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
+           .addCase(deleteClient.pending, (state) => {
+              state.loading = true;
+              state.error = null;
+            })
+            .addCase(deleteClient.fulfilled, (state, action) => {
+              state.loading = false;
+              state.clients = state.clients.filter(
+                (client) => client.id !== action.payload
+              );
+            })
+            .addCase(deleteClient.rejected, (state, action) => {
+              state.loading = false;
+              state.error = action.payload;
+            });
   },
 });
 

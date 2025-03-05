@@ -56,11 +56,11 @@ export const updateAgent = createAsyncThunk(
     try {
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_API_URL}/api/Agent/${id}`,
-        updateData, // التأكد من أن updateData هو كائن JSON صالح
+        updateData, 
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json", // التأكد من أن Content-Type مضبوط
+            "Content-Type": "application/json", 
           },
         }
       );
@@ -92,7 +92,7 @@ export const deleteAgent = createAsyncThunk(
       );
       if (response.status === 200 || response.status === 204) {
 
-      return     id;
+      return response.data.data;
       }
       else {
         console.error(`Failed to delete agent, Status: ${response.status}`);
@@ -103,6 +103,9 @@ export const deleteAgent = createAsyncThunk(
     }
   }
 );
+
+
+
 
 const agentSlice = createSlice({
   name: "agents",

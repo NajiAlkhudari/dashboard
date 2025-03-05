@@ -16,7 +16,7 @@ const Page = () => {
   const dispatch = useDispatch();
   const { agents, error, loading } = useSelector((state) => state.agents);
 
-  const [activeModal, setActiveModal] = useState(null); // "add", "update"
+  const [activeModal, setActiveModal] = useState(null); // "add", "update" , "delete"
   const [agentDataToUpdate, setAgentDataToUpdate] = useState(null);
   const [agentIdToUpdate, setAgentIdToUpdate] = useState(null);
     const [agentIdToDelete, setAgentIdToDelete] = useState(null);
@@ -35,8 +35,7 @@ const Page = () => {
 
   const handleAddAgent = async (newAgentData) => {
     try {
-      await dispatch(postAgent(newAgentData)).unwrap();
-      await dispatch(fetchAgents());
+      await dispatch(postAgent(newAgentData));
     } catch (error) {
       console.error("Error adding agent:", error);
     } finally {
@@ -50,8 +49,7 @@ const Page = () => {
         console.error("No agentIdToUpdate provided");
         return;
       }
-  
-      await dispatch(updateAgent({ id: agentIdToUpdate, updateData: updatedData })).unwrap(); // استخدم .unwrap() للحصول على النتيجة
+      await dispatch(updateAgent({ id: agentIdToUpdate, updateData: updatedData }));
   
     } catch (error) {
       console.error("Error updating agent:", error);
@@ -80,8 +78,7 @@ const Page = () => {
     try {
       if (!agentIdToDelete) return;
   
-      await dispatch(deleteAgent(agentIdToDelete)).unwrap(); // استخدام .unwrap() للحصول على النتيجة
-      await dispatch(fetchAgents());
+      await dispatch(deleteAgent(agentIdToDelete));
 
   
     } catch (error) {
