@@ -1,18 +1,31 @@
 "use client"
-import React , {useState} from "react";
+import React , {useState , useEffect} from "react";
 import Modal from "../ui/Modal";
 import TextInputForm from "../ui/TextInput/TextInputForm";
 
 
 
-const  AddAgent = ({ isOpen, onClose, onSubmitAgent })=>{
+const  UpdateAgentModal = ({ isOpen, onClose, onUpdateAgent , initialData })=>{
 const [agentData , setAgentData]= useState({
-    name: " ",
-    phone : " ",
-    percentage : " ",
-    notes : " "
+    name: "",
+    phone : "",
+    percentage : "",
+    notes : ""
 });
 
+
+
+  useEffect(() => {
+    if (initialData) {
+
+        setAgentData({
+        name : initialData.name || '',
+        phone : initialData.phone || '',
+        percentage : initialData.percentage || '',
+        notes : initialData.notes || '',
+      });
+    }
+  }, [initialData]);
 
 const handleChange = (e)=>{
     setAgentData({
@@ -21,13 +34,26 @@ const handleChange = (e)=>{
     });
 };
 
-
 const handleSubmit = () => {
-    onSubmitAgent(agentData);
-  };
+    const updatedData = {
+      name: agentData.name.trim() || "", 
+      phone: agentData.phone.trim() || "",
+      percentage: parseFloat(agentData.percentage) || 0, 
+      notes: agentData.notes.trim() || "",
+    };
+
+    console.log("Submitting updated agent data:", updatedData);
+
+    if (!updatedData.name || !updatedData.phone || isNaN(updatedData.percentage)) {
+      alert("Please fill all fields correctly");
+      return;
+    }
+
+    onUpdateAgent(updatedData); 
+};
 
 return(
-   <Modal isOpen={isOpen} onClose={onClose} title="Add Agent">
+   <Modal isOpen={isOpen} onClose={onClose} title="Update Agent">
       <div className="sm:flex sm:items-center px-12">
                 <div className="mt-3 text-center sm:mt-0 sm:text-left">
                     <div className="mt-2 space-y-4">
@@ -35,28 +61,28 @@ return(
                         <TextInputForm
                         type="text"
                         name="name"
-                        value={agentData.name}
+                        value={agentData.name || ""}
                         onChange={handleChange}  
                          />
                             <label className="block text-sm font-medium text-gray-700">Phone</label>
                         <TextInputForm
                             type="text"
                             name="phone"
-                            value={agentData.phone}
+                            value={agentData.phone || ""}
                             onChange={handleChange}
                         />
                              <label className="block text-sm font-medium text-gray-700">Percentage</label>
                         <TextInputForm
                             type="number"
                             name="percentage"
-                            value={agentData.percentage}
+                            value={agentData.percentage || ""}
                             onChange={handleChange}
                         />
                                 <label className="block text-sm font-medium text-gray-700">Notes</label>
                         <TextInputForm
                             type="text"
                             name="notes"
-                            value={agentData.notes}
+                            value={agentData.notes || ""}
                             onChange={handleChange}
                         />
                         </div>
@@ -68,7 +94,7 @@ return(
                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-sky-900 text-base font-medium text-white hover:bg-sky-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={handleSubmit}
                 >
-                    Add
+                    Update
                 </button>
                 <button
                     type="button"
@@ -83,4 +109,4 @@ return(
 }
 
 
-export default AddAgent;
+export default UpdateAgentModal;

@@ -75,7 +75,7 @@ import { Permissions } from '@/utils/Permissions';
       <PostClientModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onUpdate={handleAddClient} 
+        onSubmitClient={handleAddClient} 
       />
  
     </div>

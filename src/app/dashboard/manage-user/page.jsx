@@ -143,7 +143,7 @@ const Page = () => {
         <AddUserModal
           isOpen={isModalOpenAdd}
           onClose={() => setIsModalOpenAdd(false)}
-          onUpdate={handleAddUser}
+          onSumbitUser={handleAddUser}
         />
       </div>
     </Card>

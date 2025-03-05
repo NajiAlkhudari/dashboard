@@ -4,7 +4,7 @@ import ComboBox from '../ui/ComboBox';
 import { permissionOptions } from '../../utils/permissionOptions';
 import TextInputForm from '../ui/TextInput/TextInputForm';
 
-const AddUserModal = ({ isOpen, onClose, onUpdate }) => {
+const AddUserModal = ({ isOpen, onClose, onSumbitUser }) => {
   const [formData, setFormData] = useState({
     name: '',
     notes: '',
@@ -43,7 +43,7 @@ const AddUserModal = ({ isOpen, onClose, onUpdate }) => {
       password: formData.password,
       userPermissions: totalPermissions,
     };
-    onUpdate(updatedData);
+    onSumbitUser(updatedData);
   };
 
   return (

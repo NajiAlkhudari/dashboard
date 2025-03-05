@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "../ui/Modal";
 import TextInputForm from "../ui/TextInput/TextInputForm";
 
-const AddCompany = ({ isOpen, onClose, onUpdate }) => {
+const AddCompany = ({ isOpen, onClose, onSubmitCpmpany }) => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -23,15 +23,7 @@ const AddCompany = ({ isOpen, onClose, onUpdate }) => {
   
 
   const handleSubmit =()=>{
-    const postData= {
-        name : formData.name,
-        phone : formData.phone,
-        managerName : formData.managerName,
-        address : formData.address,
-        networkDomain : formData.networkDomain,
-        notes : formData.notes,
-    }
-    onUpdate(postData);
+    onSubmitCpmpany(formData);
   };
 
   return(

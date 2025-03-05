@@ -7,7 +7,7 @@ import Modal from '../ui/Modal';
 import TextInputForm from '../ui/TextInput/TextInputForm';
 import ComboBox from '../ui/ComboBox';
 
-const PostClientModal = ({ isOpen, onClose, onUpdate }) => {
+const PostClientModal = ({ isOpen, onClose, onSubmitClient}) => {
     const [clientData, setClientData] = useState({
         name: "",
         phone: "",
@@ -57,13 +57,7 @@ const PostClientModal = ({ isOpen, onClose, onUpdate }) => {
     };
 
     const handleSubmit = () => {
-        const updateData = {
-            name: clientData.name,
-            phone: clientData.phone,
-            prefex: clientData.prefex,
-            companyId: clientData.companyId,
-        };
-        onUpdate(updateData);
+        onSubmitClient(clientData);
     };
 
     return (

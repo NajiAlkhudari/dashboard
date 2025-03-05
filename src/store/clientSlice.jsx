@@ -49,6 +49,30 @@ export const postClient = createAsyncThunk ("clients/postClient" , async (postDa
     }
 })
 
+
+export const updateClient = createAsyncThunk(
+  "clients/updateClient",
+  async ({ id, updateData }, { rejectWithValue }) => {
+    const token = Cookies.get("token");
+
+    try {
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/Client/${id}`,
+        updateData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const clientSlice = createSlice({
   name: "clients",
   initialState: {
@@ -81,6 +105,22 @@ const clientSlice = createSlice({
         state.clients.push(action.payload);
       })
       .addCase(postClient.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+      builder 
+      .addCase(updateClient.pending , (state)=>{
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateClient.fulfilled ,(state, action)=>{
+        state.loading = false;
+        const index = state.clients.findIndex(client => client.id === action.payload.id);
+        if (index !== -1) {
+          state.clients[index] = action.payload;
+        }
+      })
+      .addCase(updateClient.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

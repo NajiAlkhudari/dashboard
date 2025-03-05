@@ -17,33 +17,28 @@ import { Permissions } from "@/utils/Permissions";
 import withPermission from "@/utils/withPermission";
 
 const Page = () => {
-    const dispatch = useDispatch();
-    const { companies, loading, error } = useSelector((state) => state.companies);
-  const [isModalOpenAdd, setIsModalOpenAdd] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalOpenUpdate, setIsModalOpenUpdate] = useState(false);
+  const dispatch = useDispatch();
+  const { companies, loading, error } = useSelector((state) => state.companies);
 
-  const [companyDataToUpdate, setCompanyDataToUpdate] = useState(null);
+  const [activeModal, setActiveModal] = useState(null); // "add", "update", "delete"
   const [companyIdToDelete, setCompanyIdToDelete] = useState(null);
+  const [companyDataToUpdate, setCompanyDataToUpdate] = useState(null);
   const [companyIdToUpdate, setCompanyIdToUpdate] = useState(null);
 
-
-
-   useEffect(() => {
-      dispatch(getCompanies());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(getCompanies());
+  }, [dispatch]);
 
   const handleAddCompany = async (newCompanyData) => {
     try {
       const isAdded = await postCompany(newCompanyData);
       if (isAdded) {
-                 await dispatch(getCompanies());
-
+        await dispatch(getCompanies());
       }
     } catch (error) {
       console.error("Error adding company:", error);
     } finally {
-      setIsModalOpenAdd(false);
+      setActiveModal(null); 
     }
   };
 
@@ -53,12 +48,11 @@ const Page = () => {
       const isUpdated = await UpdateCompany(companyIdToUpdate, updatedData);
       if (isUpdated) {
         await dispatch(getCompanies());
-
       }
     } catch (error) {
       console.error("Error updating company:", error);
     } finally {
-      setIsModalOpenUpdate(false);
+      setActiveModal(null); 
       setCompanyIdToUpdate(null);
       setCompanyDataToUpdate(null);
     }
@@ -69,7 +63,7 @@ const Page = () => {
       const companyData = await fetchCompanyById(id);
       setCompanyDataToUpdate(companyData);
       setCompanyIdToUpdate(id);
-      setIsModalOpenUpdate(true);
+      setActiveModal("update");
     } catch (error) {
       console.error("Error fetching company data for update:", error);
     }
@@ -78,7 +72,7 @@ const Page = () => {
   const handleConfirmDelete = async () => {
     try {
       if (!companyIdToDelete) return;
-      
+
       console.log("Deleting company with ID:", companyIdToDelete);
 
       const isDeleted = await deleteCompany(companyIdToDelete);
@@ -91,11 +85,10 @@ const Page = () => {
     } catch (error) {
       console.error("Error deleting company:", error);
     } finally {
-      setIsModalOpen(false);
+      setActiveModal(null); 
       setCompanyIdToDelete(null);
     }
-};
-
+  };
 
   const columns = [
     { header: "ID", key: "id" },
@@ -116,7 +109,7 @@ const Page = () => {
             <h1 className="text-2xl font-bold mb-4">Companies</h1>
             <button
               className="mb-4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-sky-900 text-base font-medium text-white hover:bg-sky-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
-              onClick={() => setIsModalOpenAdd(true)}
+              onClick={() => setActiveModal("add")} 
             >
               New Company
             </button>
@@ -129,33 +122,42 @@ const Page = () => {
             columns={columns}
             onDelete={(id) => {
               setCompanyIdToDelete(id);
-              setIsModalOpen(true);
+              setActiveModal("delete"); 
             }}
             onUpdate={openModalUpdate}
           />
         </div>
-        <UpdateCompanyModal
-          isOpen={isModalOpenUpdate}
-          onClose={() => {
-            setIsModalOpenUpdate(false);
-            setCompanyDataToUpdate(null);
-          }}
-          onUpdate={handleUpdate}
-          initialData={companyDataToUpdate}
-        />
-        <AddCompany
-          isOpen={isModalOpenAdd}
-          onClose={() => setIsModalOpenAdd(false)}
-          onUpdate={handleAddCompany}
-        />
-        <DeleteCompnayModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onDelete={handleConfirmDelete}
-        />
+
+        {activeModal === "add" && (
+          <AddCompany
+            isOpen={true}
+            onClose={() => setActiveModal(null)}
+            onSubmitCpmpany={handleAddCompany}
+          />
+        )}
+
+        {activeModal === "update" && (
+          <UpdateCompanyModal
+            isOpen={true}
+            onClose={() => {
+              setActiveModal(null);
+              setCompanyDataToUpdate(null);
+            }}
+            onUpdate={handleUpdate}
+            initialData={companyDataToUpdate}
+          />
+        )}
+
+        {activeModal === "delete" && (
+          <DeleteCompnayModal
+            isOpen={true}
+            onClose={() => setActiveModal(null)}
+            onDelete={handleConfirmDelete}
+          />
+        )}
       </Card>
     </>
   );
 };
 
-export default withPermission(Page , Permissions.CanReadCompany) ; 
+export default withPermission(Page, Permissions.CanReadCompany);

@@ -9,6 +9,7 @@ const TextInputForm = ({
   label,
   name,
   value,
+  required,
   onChange,
   placeholder,
   type,
@@ -31,6 +32,7 @@ const TextInputForm = ({
           placeholder={placeholder}
           type={inputType} 
           name={name}
+          
         />
         {type === "password" && (
           <button
