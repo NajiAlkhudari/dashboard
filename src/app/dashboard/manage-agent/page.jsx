@@ -9,8 +9,9 @@ import { Permissions } from "@/utils/Permissions";
 import AddAgent from "@/components/agent/AddAgent";
 import UpdateAgentModal from "@/components/agent/UpdateAgentModal";
 import Card from "@/components/ui/Card";
-import { deleteAgentTest, fetchAgentById, UpdateAgent, UpdateAgentTest } from "@/Services/agentService";
+import {  fetchAgentById } from "@/Services/agentService";
 import DeleteAgentModal from "@/components/agent/DeleteAgentModal";
+import { showErrorToast , showSuccessToast , ToastContainer } from "@/utils/ToastNotifications";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const Page = () => {
   const handleAddAgent = async (newAgentData) => {
     try {
       await dispatch(postAgent(newAgentData));
+      showSuccessToast("success addagent");
     } catch (error) {
       console.error("Error adding agent:", error);
     } finally {
@@ -50,7 +52,8 @@ const Page = () => {
         return;
       }
       await dispatch(updateAgent({ id: agentIdToUpdate, updateData: updatedData }));
-  
+      showSuccessToast("success update agent");
+
     } catch (error) {
       console.error("Error updating agent:", error);
     } finally {
@@ -79,8 +82,8 @@ const Page = () => {
       if (!agentIdToDelete) return;
   
       await dispatch(deleteAgent(agentIdToDelete));
+      showSuccessToast("success to delete agent");
 
-  
     } catch (error) {
       console.error("Error deleting agent:", error);
     } finally {
@@ -157,6 +160,7 @@ const Page = () => {
             onDelete={handleConfirmDelete}
           />
         )}
+        <ToastContainer />
       </Card>
     </>
   );

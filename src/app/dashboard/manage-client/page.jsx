@@ -2,7 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "@/components/partials/Table";
-import { deleteClient, fetchClient, postClient, updateClient } from "@/store/clientSlice";
+import {
+  deleteClient,
+  fetchClient,
+  postClient,
+  updateClient,
+} from "@/store/clientSlice";
 import Loading from "./loading";
 import PostClientModal from "@/components/client/PostClientModal";
 import Card from "@/components/ui/Card";
@@ -11,25 +16,34 @@ import { Permissions } from "@/utils/Permissions";
 import UpdateClientModal from "@/components/client/UpdateClientModal";
 import { fetchClientById } from "@/Services/clientService";
 import DeleteClientModal from "@/components/client/DeleteClientModal";
-
+import {
+  showErrorToast,
+  showSuccessToast,
+  ToastContainer,
+} from "@/utils/ToastNotifications";
 const Page = () => {
+
+
   const dispatch = useDispatch();
   const { clients, error, loading } = useSelector((state) => state.clients);
 
   const [activeModal, setActiveModal] = useState(null); // "add", "update" , "delete"
   const [clientDataToUpdate, setClientDataToUpdate] = useState(null);
   const [clientIdToUpdate, setClientIdToUpdate] = useState(null);
-  const [clientIdDelete , setClientDelete]=useState(null);
+  const [clientIdDelete, setClientDelete] = useState(null);
+
+
 
   const handleAddClient = async (clientData) => {
     try {
       await dispatch(postClient(clientData));
-      activeModal(null);
+      showSuccessToast("client has added");
+      setActiveModal(null); 
     } catch (error) {
       console.error("Failed to add client:", error);
     }
   };
-
+  
   const handleUpdateClient = async (updatedData) => {
     try {
       if (!clientIdToUpdate) {
@@ -39,12 +53,27 @@ const Page = () => {
       await dispatch(
         updateClient({ id: clientIdToUpdate, updateData: updatedData })
       );
+      showSuccessToast("client has updated");
     } catch (error) {
       console.error("Error updating client:", error);
     } finally {
-      setActiveModal(null);
+      setActiveModal(null);  
     }
   };
+  
+  const confirmhandleDelete = async () => {
+    try {
+      if (!clientIdDelete) return;
+      await dispatch(deleteClient(clientIdDelete));
+    } catch (error) {
+      console.error("Error deleting client:", error);
+    } finally {
+      setActiveModal(null);  
+      setClientDelete(null);
+    }
+  };
+  
+  
 
   const openModalUpdate = async (id) => {
     try {
@@ -72,19 +101,6 @@ const Page = () => {
     }
   }, [activeModal]);
 
-const confirmhandleDelete = async ()=>{
-  try{
-    if(!clientIdDelete) return;
-    await dispatch(deleteClient(clientIdDelete));
-
-} catch (error) {
-  console.error("Error deleting client:", error);
-} finally {
-  setActiveModal(null); 
-  setClientDelete(null);
-}
-  
-}
 
   const columns = [
     { header: "ID", key: "id" },
@@ -116,18 +132,18 @@ const confirmhandleDelete = async ()=>{
         </div>
         <div>
           <Table
-            columns={columns}
             data={clients}
+            columns={columns}
             onUpdate={(id) => openModalUpdate(id)}
             onDelete={(id) => {
               setClientDelete(id);
-              setActiveModal("delete"); 
+              setActiveModal("delete");
             }}
           />
 
           {activeModal === "add" && (
             <PostClientModal
-              isOpen={activeModal}
+              isOpen={true}
               onClose={() => setActiveModal(null)}
               onSubmitClient={handleAddClient}
             />
@@ -135,21 +151,22 @@ const confirmhandleDelete = async ()=>{
 
           {activeModal === "update" && (
             <UpdateClientModal
-              isOpen={activeModal}
+              isOpen={true}
               onClose={() => setActiveModal(null)}
               onUpdateClient={handleUpdateClient}
               initialData={clientDataToUpdate}
             />
           )}
           {activeModal === "delete" && (
-          <DeleteClientModal
-            isOpen={true}
-            onClose={() => setActiveModal(null)}
-            onDelete={confirmhandleDelete}
-          />
-        )}
+            <DeleteClientModal
+              isOpen={true}
+              onClose={() => setActiveModal(null)}
+              onDelete={confirmhandleDelete}
+            />
+          )}
         </div>
       </Card>
+      <ToastContainer />
     </>
   );
 };

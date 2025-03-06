@@ -77,6 +77,7 @@ export const updateAgent = createAsyncThunk(
     }
   }
 );
+
 export const deleteAgent = createAsyncThunk(
   "agents/deleteAgent",
   async (id, { rejectWithValue }) => {
