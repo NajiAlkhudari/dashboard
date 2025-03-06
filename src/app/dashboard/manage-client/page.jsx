@@ -37,6 +37,7 @@ const Page = () => {
   const handleAddClient = async (clientData) => {
     try {
       await dispatch(postClient(clientData));
+      showSuccessToast("client has added");
       setActiveModal(null); 
     } catch (error) {
       console.error("Failed to add client:", error);

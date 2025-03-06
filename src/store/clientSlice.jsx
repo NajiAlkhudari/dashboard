@@ -151,7 +151,8 @@ const clientSlice = createSlice({
       .addCase(updateClient.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      })
+      });
+      builder
            .addCase(deleteClient.pending, (state) => {
               state.loading = true;
               state.error = null;

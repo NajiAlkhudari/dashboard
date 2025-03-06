@@ -82,6 +82,8 @@ const Page = () => {
       if (!agentIdToDelete) return;
   
       await dispatch(deleteAgent(agentIdToDelete));
+      showSuccessToast("success to delete agent");
+
     } catch (error) {
       console.error("Error deleting agent:", error);
     } finally {
