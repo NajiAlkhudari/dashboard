@@ -132,7 +132,7 @@ const Page = () => {
           <AddCompany
             isOpen={true}
             onClose={() => setActiveModal(null)}
-            onSubmitCpmpany={handleAddCompany}
+            onSubmitCompany={handleAddCompany}
           />
         )}
 
