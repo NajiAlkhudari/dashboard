@@ -121,8 +121,7 @@ const clientSlice = createSlice({
       .addCase(fetchClient.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
-      builder 
+      })
       .addCase(postClient.pending , (state)=>{
         state.loading = true;
         state.error = null;
@@ -134,8 +133,7 @@ const clientSlice = createSlice({
       .addCase(postClient.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
-      builder 
+      }) 
       .addCase(updateClient.pending , (state)=>{
         state.loading = true;
         state.error = null;
@@ -150,8 +148,8 @@ const clientSlice = createSlice({
       .addCase(updateClient.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
-      builder
+      })
+      
            .addCase(deleteClient.pending, (state) => {
               state.loading = true;
               state.error = null;
