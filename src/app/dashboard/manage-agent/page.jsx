@@ -12,6 +12,7 @@ import Card from "@/components/ui/Card";
 import {  fetchAgentById } from "@/Services/agentService";
 import DeleteAgentModal from "@/components/agent/DeleteAgentModal";
 import { showErrorToast , showSuccessToast , ToastContainer } from "@/utils/ToastNotifications";
+import Error from "../error";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -34,33 +35,68 @@ const Page = () => {
     }
   }, [activeModal]);
 
-  const handleAddAgent = async (newAgentData) => {
-    try {
-      await dispatch(postAgent(newAgentData));
-      showSuccessToast("success addagent");
-    } catch (error) {
-      console.error("Error adding agent:", error);
-    } finally {
-      setActiveModal(null);
-    }
-  };
-
-  const handleUpdate = async (updatedData) => {
-    try {
-      if (!agentIdToUpdate) {
-        console.error("No agentIdToUpdate provided");
-        return;
-      }
-      await dispatch(updateAgent({ id: agentIdToUpdate, updateData: updatedData }));
-      showSuccessToast("success update agent");
-
-    } catch (error) {
-      console.error("Error updating agent:", error);
-    } finally {
-      setActiveModal(null);
-    }
-  };
   
+
+    const handleAddAgent = async (newAgentData) => {
+      try {
+        const resultAction = await dispatch(postAgent(newAgentData));
+    
+        if (postAgent.fulfilled.match(resultAction)) {
+          showSuccessToast("Agent added successfully!");
+        } else {
+          showErrorToast(`Failed to add agent. Error: ${resultAction.payload || "Unknown error"}`);
+        }
+      } catch (e) {
+        console.error("Error adding agent:", e);
+        showErrorToast("An unexpected error occurred. Please try again.");
+      } finally {
+        setActiveModal(null);
+      }
+    };
+    
+
+    
+    const handleUpdate = async (updatedData) => {
+      try {
+        if (!agentIdToUpdate) {
+          console.error("No agentIdToUpdate provided");
+          return;
+        }
+        const resultAction = await dispatch(updateAgent({ id: agentIdToUpdate, updateData: updatedData }));
+    
+        if (updateAgent.fulfilled.match(resultAction)) {
+          showSuccessToast("Agent updated successfully!");  
+        } else {
+          showErrorToast(`Failed to update agent. Error: ${resultAction.payload || "Unknown error"}`);  
+        }
+      } catch (error) {
+        console.error("Error updating agent:", error);
+        showErrorToast("An unexpected error occurred. Please try again.");  
+      } finally {
+        setActiveModal(null);  
+      }
+    };
+    
+    const handleConfirmDelete = async () => {
+      try {
+        if (!agentIdToDelete) return;
+    
+        const resultAction = await dispatch(deleteAgent(agentIdToDelete));
+    
+        if (deleteAgent.fulfilled.match(resultAction)) {
+          showSuccessToast("Agent deleted successfully!");  
+        } else {
+          showErrorToast(`Failed to delete agent. Error: ${resultAction.payload || "Unknown error"}`);  
+        }
+      } catch (error) {
+        console.error("Error deleting agent:", error);
+        showErrorToast("An unexpected error occurred. Please try again.");  
+      } finally {
+        setActiveModal(null);     
+        setAgentIdToDelete(null); 
+      }
+    };
+    
 
   const openModalUpdate = async (id) => {
     try {
@@ -77,20 +113,7 @@ const Page = () => {
     }
   };
 
-  const handleConfirmDelete = async () => {
-    try {
-      if (!agentIdToDelete) return;
-  
-      await dispatch(deleteAgent(agentIdToDelete));
-      showSuccessToast("success to delete agent");
-
-    } catch (error) {
-      console.error("Error deleting agent:", error);
-    } finally {
-      setActiveModal(null); 
-      setAgentIdToDelete(null);
-    }
-  };
+if (loading) return <Loading />
   
   const columns = [
     { header: "ID", key: "id" },
@@ -101,13 +124,7 @@ const Page = () => {
     { header: "Action", key: "action" },
   ];
 
-  if (loading) {
-    return <Loading />;
-  }
 
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
 
   return (
     <>
@@ -160,8 +177,8 @@ const Page = () => {
             onDelete={handleConfirmDelete}
           />
         )}
-        <ToastContainer />
       </Card>
+      <ToastContainer />
     </>
   );
 };

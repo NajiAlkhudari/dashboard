@@ -78,7 +78,7 @@ const Page = () => {
   const openModalUpdate = async (id) => {
     try {
       const userData = await fetchUserById(id);
-      console.log(' USER DATA', userData)
+      console.log(" USER DATA", userData);
       setUserDataToUpdate(userData);
       setUserIdToUpdate(id);
       setIsModalOpenUpdate(true);
@@ -95,26 +95,20 @@ const Page = () => {
     { header: "Action", key: "action" },
   ];
 
-
-  if (loading) {
-    return (
-    <Loading />
-    );
-  }
+  if (loading) return <Loading />;
 
   return (
     <Card>
       <div className="p-6">
         <div className="flex flex-row justify-between">
           <h1 className="text-2xl font-bold mb-4">Users Table</h1>
-         
-            <button
-              className="mb-4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-sky-900 text-base font-medium text-white hover:bg-sky-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
-              onClick={() => setIsModalOpenAdd(true)}
-            >
-              Add User
-            </button>
-      
+
+          <button
+            className="mb-4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-sky-900 text-base font-medium text-white hover:bg-sky-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+            onClick={() => setIsModalOpenAdd(true)}
+          >
+            Add User
+          </button>
         </div>
         <Table
           data={users}

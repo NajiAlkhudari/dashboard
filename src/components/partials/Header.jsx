@@ -12,7 +12,8 @@ import Sidebar from "@/components/partials/sidebar/Sidebar";
 import { detail } from "@/store/meSlice";
 import { Permissions, useHasPermission } from "@/utils/Permissions";
 import { FaUserSecret } from "react-icons/fa";
-import ThemeSwitcher from "../ThemeSwitcher";
+import { MdOutlineRealEstateAgent } from "react-icons/md";
+import Cookies from "js-cookie";
 
 
 const Header = ({ isSidebarOpen, onSidebarToggle }) => {
@@ -40,6 +41,7 @@ const viewAgent= useHasPermission(Permissions.CanReadAgent)
   };
 
   const navigateToLogin = () => {
+    Cookies.remove('token');
     router.push("/unauthorize");  
   };
 
@@ -64,9 +66,7 @@ const viewAgent= useHasPermission(Permissions.CanReadAgent)
         </div>
       
         <nav className="hidden sm:flex items-center space-x-4 text-sm sm:text-base lg:text-lg text-black">
-        {/* <div>
-          <ThemeSwitcher />
-        </div> */}
+
           <div className="border-l border-gray-600 h-6"></div>
           
           <div className="flex space-x-2">
@@ -140,7 +140,7 @@ const viewAgent= useHasPermission(Permissions.CanReadAgent)
 {viewAgent && (
     <SubMenu
     label="Agents"
-    icon={FaUserSecret}
+    icon={MdOutlineRealEstateAgent}
     onClick={() => handleSidebarItemClick("/dashboard/manage-agent")} 
   />
 )}

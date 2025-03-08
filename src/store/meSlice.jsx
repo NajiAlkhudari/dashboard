@@ -19,7 +19,7 @@ export const detail = createAsyncThunk("me/detail", async (_, thunkAPI) => {
     });
     return response.data?.data;
   } catch (error) {
-    return rejectWithValue(error.message || "Something went wrong");
+    return rejectWithValue(error.response ? error.response.data.message : error.message);
   }
 });
 

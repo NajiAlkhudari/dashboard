@@ -13,6 +13,7 @@ import { getCompanies , postCompany, updateCompany , deleteCompnay } from "@/sto
 import { Permissions } from "@/utils/Permissions";
 import withPermission from "@/utils/withPermission";
 import { showErrorToast , showSuccessToast , ToastContainer } from "@/utils/ToastNotifications";
+import Loading from "./loading";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -31,14 +32,20 @@ const Page = () => {
 
     const handleAddCompany = async (companyData) => {
       try {
-        await dispatch(postCompany(companyData));
-        showSuccessToast("success to add company")
-        setActiveModal(null); 
-      } catch (error) {
-        console.error("Failed to add company:", error);
-        showErrorToast("failed to add company")
-      }
-    };
+      const  resultAction = await dispatch(postCompany(companyData));
+        if (postCompany.fulfilled.match(resultAction)) {
+                 showSuccessToast("Company added successfully!");
+               } else {
+                 showErrorToast(`Failed to add company. Error: ${resultAction.payload || "Unknown error"}`);
+               }
+             } catch (e) {
+               console.error("Error adding company:", e);
+               showErrorToast("An unexpected error occurred. Please try again.");
+             } finally {
+               setActiveModal(null);
+             }
+           };
+    
     
 
   const handleUpdateCompany = async (updatedData) => {
@@ -47,17 +54,24 @@ const Page = () => {
         console.error("No companyIdToUpdate provided");
         return;
       }
-      await dispatch(
+   const  resultAction =   await dispatch(
         updateCompany({ id: companyIdToUpdate, updateData: updatedData })
       );
-      showSuccessToast("company has updated");
-    } catch (error) {
-      console.error("Error updating company:", error);
-      showErrorToast("failed to update company")
-    } finally {
-      setActiveModal(null);  
-    }
-  }
+    if (updateCompany.fulfilled.match(resultAction)) {
+                showSuccessToast("Company update successfully!");
+              } else {
+                showErrorToast(`Failed to update company. Error: ${resultAction.payload || "Unknown error"}`);
+              }
+            } catch (e) {
+              console.error("Error update company:", e);
+              showErrorToast("An unexpected error occurred. Please try again.");
+            } finally {
+              setActiveModal(null);
+            }
+          };
+          
+
+
   const openModalUpdate = async (id) => {
     try {
       const companyData = await fetchCompanyById(id);
@@ -72,13 +86,16 @@ const Page = () => {
   const confirmhandleDelete = async () => {
      try {
        if (!companyIdToDelete) return;
-       await dispatch(deleteCompnay(companyIdToDelete));
-       showSuccessToast("success to delete company");
-     } catch (error) {
-       console.error("Error deleting company:", error);
-       showErrorToast("failed to delete company");
-     } finally {
-       setActiveModal(null);  
+      const resultAction =   await dispatch(deleteCompnay(companyIdToDelete));
+          if (deleteCompnay.fulfilled.match(resultAction)) {
+                   showSuccessToast("Company deleted successfully!");  
+                 } else {
+                   showErrorToast(`Failed to delete company. Error: ${resultAction.payload || "Unknown error"}`);  
+                 }
+          } catch (error) {
+            console.error("Error deleting company:", error);
+          } finally {
+            setActiveModal(null);  
        setCompanyIdToDelete(null);
      }
    };
@@ -94,6 +111,8 @@ const Page = () => {
     { header: "Notes", key: "notes" },
     { header: "Action", key: "action" },
   ];
+
+  if(loading) return <Loading />
 
   return (
     <>

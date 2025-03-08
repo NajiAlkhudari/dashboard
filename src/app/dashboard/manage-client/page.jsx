@@ -36,13 +36,20 @@ const Page = () => {
 
   const handleAddClient = async (clientData) => {
     try {
-      await dispatch(postClient(clientData));
-      showSuccessToast("client has added");
-      setActiveModal(null); 
-    } catch (error) {
-      console.error("Failed to add client:", error);
-    }
-  };
+      const resultAction =  await dispatch(postClient(clientData));
+     if (postClient.fulfilled.match(resultAction)) {
+             showSuccessToast("Client added successfully!");
+           } else {
+             showErrorToast(`Failed to add client. Error: ${resultAction.payload || "Unknown error"}`);
+           }
+         } catch (e) {
+           console.error("Error adding client:", e);
+           showErrorToast("An unexpected error occurred. Please try again.");
+         } finally {
+           setActiveModal(null);
+         }
+       };
+       
   
   const handleUpdateClient = async (updatedData) => {
     try {
@@ -50,21 +57,32 @@ const Page = () => {
         console.error("No clientIdToUpdate provided");
         return;
       }
-      await dispatch(
+   const resultAction=   await dispatch(
         updateClient({ id: clientIdToUpdate, updateData: updatedData })
       );
-      showSuccessToast("client has updated");
-    } catch (error) {
-      console.error("Error updating client:", error);
-    } finally {
-      setActiveModal(null);  
-    }
-  };
+     if (updateClient.fulfilled.match(resultAction)) {
+             showSuccessToast("Client update successfully!");
+           } else {
+             showErrorToast(`Failed to update client. Error: ${resultAction.payload || "Unknown error"}`);
+           }
+         } catch (e) {
+           console.error("Error update client:", e);
+           showErrorToast("An unexpected error occurred. Please try again.");
+         } finally {
+           setActiveModal(null);
+         }
+       };
+       
   
   const confirmhandleDelete = async () => {
     try {
       if (!clientIdDelete) return;
-      await dispatch(deleteClient(clientIdDelete));
+   const resultAction =   await dispatch(deleteClient(clientIdDelete));
+    if (deleteClient.fulfilled.match(resultAction)) {
+             showSuccessToast("Client deleted successfully!");  
+           } else {
+             showErrorToast(`Failed to delete client. Error: ${resultAction.payload || "Unknown error"}`);  
+           }
     } catch (error) {
       console.error("Error deleting client:", error);
     } finally {
@@ -112,9 +130,8 @@ const Page = () => {
     { header: "Action", key: "action" },
   ];
 
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading)   return <Loading />;
+  
 
   return (
     <>

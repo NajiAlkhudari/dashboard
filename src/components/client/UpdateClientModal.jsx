@@ -5,16 +5,10 @@ import { Formik, Form, Field } from 'formik';
 import Modal from '../ui/Modal';
 import TextInputForm from '../ui/TextInput/TextInputForm';
 import ComboBox from '../ui/ComboBox';
-import * as Yup from 'yup';
 import { useDispatch, useSelector  } from 'react-redux';
 import { getCompanies } from '@/store/companySlice';
+import clientSchema from '@/validators/ClientValidation';
 
-const clientSchema = Yup.object({
-  name: Yup.string().required('Name is required'),
-  phone: Yup.string().required('Phone is required'),
-  prefex: Yup.string().required('Prefix is required'),
-  companyId: Yup.string().required('Company is required'),
-});
 
 const UpdateClientModal = ({ isOpen, onClose, onUpdateClient, initialData }) => {
 

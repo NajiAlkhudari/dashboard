@@ -21,7 +21,7 @@ export const getCompanies = createAsyncThunk(
       }
       return response.data.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response ? error.response.data.message : error.message);
     }
   }
 );
@@ -43,7 +43,7 @@ export const postCompany = createAsyncThunk ("companies/postCompaniy" , async (p
 
   }catch(error)
   {
-      return rejectWithValue(error.message);
+    return rejectWithValue(error.response ? error.response.data.message : error.message);
 
   }
 })
@@ -66,7 +66,7 @@ export const updateCompany = createAsyncThunk(
       );
       return response.data.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response ? error.response.data.message : error.message);
     }
   }
 );
@@ -89,8 +89,7 @@ export const deleteCompnay = createAsyncThunk(
       return response.data.data;
       }
       else {
-        console.error(`Failed to delete company, Status: ${response.status}`);
-        return false;
+        return rejectWithValue(error.response ? error.response.data.message : error.message);
       }
     } catch (error) {
       return rejectWithValue(error.message);

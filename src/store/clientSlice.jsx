@@ -21,7 +21,7 @@ export const fetchClient = createAsyncThunk(
       }
       return response.data.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response ? error.response.data.message : error.message);
     }
   }
 );
@@ -44,7 +44,7 @@ export const postClient = createAsyncThunk ("clients/postClient" , async (postDa
 
     }catch(error)
     {
-        return rejectWithValue(error.message);
+      return rejectWithValue(error.response ? error.response.data.message : error.message);
 
     }
 })
@@ -68,7 +68,7 @@ export const updateClient = createAsyncThunk(
       );
       return response.data.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response ? error.response.data.message : error.message);
     }
   }
 );
@@ -92,10 +92,9 @@ export const deleteClient = createAsyncThunk(
       }
       else {
         console.error(`Failed to delete client, Status: ${response.status}`);
-        return false;
       }
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response ? error.response.data.message : error.message);
     }
   }
 );

@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "js-cookie";
 
+
+
 export const fetchAgents = createAsyncThunk(
   "agents/fetchAgents",
   async (_, { rejectWithValue }) => {
@@ -21,7 +23,7 @@ export const fetchAgents = createAsyncThunk(
       }
       return response.data.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response ? error.response.data.message : error.message);
     }
   }
 );
@@ -43,7 +45,7 @@ export const postAgent = createAsyncThunk(
       );
       return response.data.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response ? error.response.data.message : error.message);
     }
   }
 );
@@ -72,7 +74,7 @@ export const updateAgent = createAsyncThunk(
           error.response.data.message || "An error occurred"
         );
       } else {
-        return rejectWithValue("No response from server");
+        return rejectWithValue(error.response ? error.response.data.message : error.message);
       }
     }
   }
@@ -97,10 +99,9 @@ export const deleteAgent = createAsyncThunk(
       }
       else {
         console.error(`Failed to delete agent, Status: ${response.status}`);
-        return false;
       }
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response ? error.response.data.message : error.message);
     }
   }
 );
