@@ -30,17 +30,17 @@ const PostClientModal = ({ isOpen, onClose, onSubmitClient }) => {
           name: '',
           phone: '',
           prefex: '',
-          companyId: '',
+          companyId: null,
         }}
         validationSchema={clientSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched, setFieldValue }) => (
-          <Form className="px-12">
-            <div className="space-y-4">
-              <div className="flex flex-col gap-1">
-                <div className="md:flex items-center gap-4">
-                  <label className="min-w-[100px] text-sm font-medium text-gray-900">Name</label>
+        {({ errors, touched, setFieldValue , values }) => (
+         <Form className="px-12">
+                  <div className="space-y-4">
+                    <div className="flex flex-col gap-1">
+                      <div className="md:flex items-center gap-1">
+                        <label className="min-w-[100px] text-sm font-medium text-gray-900">Name</label>
                   <Field
                     name="name"
                     type="text"
@@ -94,6 +94,7 @@ const PostClientModal = ({ isOpen, onClose, onSubmitClient }) => {
                         label: company.name,
                         value: company.id,
                       }))}
+                      value={values.companyId} 
                       onSelect={(companyId) => setFieldValue('companyId', companyId)}
                       placeholder="Select a company"
                       clearOnSelect={false}
