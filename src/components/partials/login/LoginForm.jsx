@@ -34,7 +34,7 @@ const LoginForm = () => {
   }, [error, success, token, router]);
   return (
     <>
-      <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
+      <form className="space-y-6 " onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label className="text-sm">UserName</label>
           <TextInput

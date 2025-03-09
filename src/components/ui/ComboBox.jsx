@@ -11,7 +11,7 @@ const ComboBox = ({ options = [], onSelect, placeholder, clearOnSelect }) => {
     : [];
 
   return (
-    <div className="relative w-64 h-32">
+    <div className="relative">
       <input
         type="text"
         placeholder={placeholder}

@@ -39,56 +39,64 @@ const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
         onSubmit={handleSubmit}
       >
         {({ setFieldValue, values, errors, touched }) => (
-          <Form className="sm:flex sm:items-center px-12">
-            <div className="mt-3 text-center sm:mt-0 sm:text-left">
-              <div className="mt-2 space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Name
-                  </label>
-                  <Field
-                    name="name"
-                    type="text"
-                    component={TextInputForm}
-                  />
+              <Form className="px-12">
+              <div className="space-y-4">
+                <div className="flex flex-col gap-1">
+                  <div className="md:flex items-center gap-1">
+                    <label className="min-w-[100px] text-sm font-medium text-gray-900">
+                      Name
+                    </label>
+                    <div className="flex-grow">
+                      <Field name="name" type="text" component={TextInputForm} />
+                    </div>
+                  </div>
                   {touched.name && errors.name && (
-                    <div className="text-red-600 text-sm">{errors.name}</div>
+                    <div className="text-red-600 text-sm pl-[110px]">{errors.name}</div>
                   )}
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
+  
+  
+                <div className="flex flex-col gap-1">
+                <div className="md:flex items-center gap-1">
+                <label className="min-w-[100px] text-sm font-medium text-gray-950">
                     Notes
                   </label>
-                  <Field
-                    name="notes"
-                    type="text"
-                    component={TextInputForm}
-                  />
+                  <div className="flex-grow">
+  
+                  <Field name="notes" type="text" component={TextInputForm} />
+                  </div>
+                  </div>
                   {touched.notes && errors.notes && (
-                    <div className="text-red-600 text-sm">{errors.notes}</div>
+                    <div className="text-red-600 text-sm pl-[110px]">{errors.notes}</div>
                   )}
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                <div className="flex flex-col gap-1">
+            <div className="md:flex items-center gap-1">
+              <label className="min-w-[100px] text-sm font-medium text-gray-950">
                     Password
                   </label>
+                  <div className="flex-grow">
+  
                   <Field
                     name="password"
                     type="password"
                     component={TextInputForm}
-                    placeholder="Leave blank to keep current password"
+                    placeholder="........."
                   />
+                  </div>
+                  </div>
                   {touched.password && errors.password && (
-                    <div className="text-red-600 text-sm">{errors.password}</div>
+                    <div className="text-red-600 text-sm pl-[110px]">{errors.password}</div>
                   )}
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Permissions
-                  </label>
+  
+             
+                  <div className="flex flex-col gap-1">
+                <div className="md:flex items-center gap-1">
+                <label className="min-w-[100px] text-sm font-medium text-gray-950">
+                Permissions
+                </label>
+                <div className="flex-grow">
                   <ComboBox
                     options={permissionOptions}
                     placeholder="Select Permissions"
@@ -102,6 +110,8 @@ const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
                     }}
                     clearOnSelect={true}
                   />
+                  </div>
+                  </div>
                   <div className="flex flex-wrap gap-2 mt-2">
                     {values.userPermissions.map((perm) => {
                       const label =
@@ -129,31 +139,31 @@ const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
                       );
                     })}
                   </div>
+                  </div>
                   {touched.userPermissions && errors.userPermissions && (
-                    <div className="text-red-600 text-sm">
+                    <div className="text-red-600 text-sm pl-[110px]">
                       {errors.userPermissions}
                     </div>
+                 
                   )}
-                </div>
+                     </div>
+             
+              <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                <button
+                  type="submit"
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-sky-900 text-base font-medium text-white hover:bg-sky-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
+                >
+                  Update
+                </button>
+                <button
+                  type="button"
+                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
+                  onClick={onClose}
+                >
+                  Cancel
+                </button>
               </div>
-            </div>
-
-            <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-              <button
-                type="submit"
-                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-sky-900 text-base font-medium text-white hover:bg-sky-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-              >
-                Update
-              </button>
-              <button
-                type="button"
-                className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
-                onClick={onClose}
-              >
-                Cancel
-              </button>
-            </div>
-          </Form>
+            </Form>
         )}
       </Formik>
     </Modal>

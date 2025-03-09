@@ -5,13 +5,8 @@ import Table from "@/components/partials/Table";
 import DeleteUserModal from "@/components/user/DeleteUserModal";
 import UpdateUserModal from "@/components/user/UpdateUserModal";
 import AddUserModal from "@/components/user/PostUserModal";
-import {
-  deleteUser,
-  fetchUsers,
-  postUser,
-  updateUser,
-} from "@/store/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+
+import {  useSelector } from "react-redux";
 import Card from "@/components/ui/Card";
 import withPermission from "@/utils/withPermission";
 import Loading from "./loading";
@@ -24,7 +19,6 @@ import {
 import { fetchUserById } from "@/Services/userServices";
 import { userService } from "@/Services/userServices";
 const Page = () => {
-  const dispatch = useDispatch();
   const { users, loading } = useSelector((state) => state.users);
   const [activeModal, setActiveModal] = useState(null); // "add", "update", "delete"
   const [userIdToDelete, setUserIdToDelete] = useState(null);
@@ -122,7 +116,7 @@ const Page = () => {
           <div className="flex flex-row justify-between">
             <h1 className="text-2xl font-bold mb-4">Users Table</h1>
             <button
-              className="mb-4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-sky-900 text-base font-medium text-white hover:bg-sky-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+              className="mb-4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-900 text-base font-medium text-white hover:bg-gray-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
               onClick={() => setActiveModal("add")}
             >
               Add User

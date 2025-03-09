@@ -39,47 +39,56 @@ const UpdateClientModal = ({ isOpen, onClose, onUpdateClient, initialData }) => 
         onSubmit={handleSubmit}
       >
         {({ errors, touched, setFieldValue }) => (
-          <Form className="sm:flex sm:items-center px-12">
-            <div className="mt-3 text-center sm:mt-0 sm:text-left">
-              <div className="mt-2 space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Name</label>
+            <Form className="px-12">
+            <div className="space-y-4">
+              <div className="flex flex-col gap-1">
+                <div className="md:flex items-center gap-1">
+                  <label className="min-w-[100px] text-sm font-medium text-gray-900">Name</label>
                   <Field
                     name="name"
                     type="text"
                     component={TextInputForm}
+                    className="w-full"
                   />
-                  {touched.name && errors.name && (
-                    <div className="text-red-600 text-sm">{errors.name}</div>
-                  )}
                 </div>
+                {touched.name && errors.name && (
+                  <div className="text-red-600 text-sm pl-[110px]">{errors.name}</div>
+                )}
+              </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Phone</label>
+              <div className="flex flex-col gap-1">
+                <div className="md:flex items-center gap-1">
+                  <label className="min-w-[100px] text-sm font-medium text-gray-950">Phone</label>
                   <Field
                     name="phone"
                     type="text"
                     component={TextInputForm}
+                    className="w-full"
                   />
-                  {touched.phone && errors.phone && (
-                    <div className="text-red-600 text-sm">{errors.phone}</div>
-                  )}
                 </div>
+                {touched.phone && errors.phone && (
+                  <div className="text-red-600 text-sm pl-[110px]">{errors.phone}</div>
+                )}
+              </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Prefix</label>
+              <div className="flex flex-col gap-1">
+                <div className="md:flex items-center gap-1">
+                  <label className="min-w-[100px] text-sm font-medium text-gray-950">Prefix</label>
                   <Field
                     name="prefex"
                     type="text"
                     component={TextInputForm}
+                    className="w-full"
                   />
-                  {touched.prefex && errors.prefex && (
-                    <div className="text-red-600 text-sm">{errors.prefex}</div>
-                  )}
                 </div>
+                {touched.prefex && errors.prefex && (
+                  <div className="text-red-600 text-sm pl-[110px]">{errors.prefex}</div>
+                )}
+              </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Company</label>
+              <div className="flex flex-col gap-1">
+                <div className="md:flex items-center gap-1">
+                  <label className="min-w-[100px] text-sm font-medium text-gray-950">Company</label>
                   {loading ? (
                     <p>Loading companies...</p>
                   ) : (
@@ -93,17 +102,17 @@ const UpdateClientModal = ({ isOpen, onClose, onUpdateClient, initialData }) => 
                       clearOnSelect={false}
                     />
                   )}
-                  {touched.companyId && errors.companyId && (
-                    <div className="text-red-600 text-sm">{errors.companyId}</div>
-                  )}
                 </div>
+                {touched.companyId && errors.companyId && (
+                  <div className="text-red-600 text-sm pl-[110px]">{errors.companyId}</div>
+                )}
               </div>
             </div>
 
             <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
               <button
                 type="submit"
-                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-sky-900 text-base font-medium text-white hover:bg-sky-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
+                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-12 py-2 bg-gray-950 text-base font-medium text-white hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
               >
                 Update
               </button>

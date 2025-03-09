@@ -6,9 +6,6 @@ import TextInputForm from "../ui/TextInput/TextInputForm";
 import { Formik, Form, Field } from "formik";
 import userSchema from "@/validators/AddUserValidation";
 const AddUserModal = ({ isOpen, onClose, onSumbitUser }) => {
-
-
-  
   const handleSubmit = (values) => {
     const totalPermissions = values.userPermissions.reduce(
       (sum, perm) => sum + perm,
@@ -36,100 +33,115 @@ const AddUserModal = ({ isOpen, onClose, onSumbitUser }) => {
         onSubmit={handleSubmit}
       >
         {({ setFieldValue, values, errors, touched }) => (
-          <Form className="sm:flex sm:items-center px-12">
-            <div className="mt-3 text-center sm:mt-0 sm:text-left">
-              <div className="mt-2 space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
+          <Form className="px-12">
+            <div className="space-y-4">
+              <div className="flex flex-col gap-1">
+                <div className="md:flex items-center gap-1">
+                  <label className="min-w-[100px] text-sm font-medium text-gray-900">
                     Name
                   </label>
-                  <Field name="name" type="text" component={TextInputForm} />
-                  {touched.name && errors.name && (
-                    <div className="text-red-600 text-sm">{errors.name}</div>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Notes
-                  </label>
-                  <Field name="notes" type="text" component={TextInputForm} />
-                  {touched.notes && errors.notes && (
-                    <div className="text-red-600 text-sm">{errors.notes}</div>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Password
-                  </label>
-                  <Field
-                    name="password"
-                    type="password"
-                    component={TextInputForm}
-                    placeholder="........."
-                  />
-                  {touched.password && errors.password && (
-                    <div className="text-red-600 text-sm">
-                      {errors.password}
-                    </div>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Permissions
-                  </label>
-                  <ComboBox
-                    options={permissionOptions}
-                    placeholder="Select Permissions"
-                    onSelect={(selectedPermission) => {
-                      if (
-                        !values.userPermissions.includes(selectedPermission)
-                      ) {
-                        setFieldValue("userPermissions", [
-                          ...values.userPermissions,
-                          selectedPermission,
-                        ]);
-                      }
-                    }}
-                    clearOnSelect={true}
-                  />
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {values.userPermissions.map((perm) => {
-                      const label =
-                        permissionOptions.find((p) => p.value === perm)
-                          ?.label || perm;
-                      return (
-                        <span
-                          key={perm}
-                          className="bg-blue-100 text-blue-700 px-2 py-1 rounded-md flex items-center"
-                        >
-                          {label}
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setFieldValue(
-                                "userPermissions",
-                                values.userPermissions.filter((p) => p !== perm)
-                              )
-                            }
-                            className="ml-2 text-red-500"
-                          >
-                            ×
-                          </button>
-                        </span>
-                      );
-                    })}
+                  <div className="flex-grow">
+                    <Field name="name" type="text" component={TextInputForm} />
                   </div>
-                  {touched.userPermissions && errors.userPermissions && (
-                    <div className="text-red-600 text-sm">
-                      {errors.userPermissions}
-                    </div>
-                  )}
                 </div>
+                {touched.name && errors.name && (
+                  <div className="text-red-600 text-sm pl-[110px]">{errors.name}</div>
+                )}
               </div>
-            </div>
+
+
+              <div className="flex flex-col gap-1">
+              <div className="md:flex items-center gap-1">
+              <label className="min-w-[100px] text-sm font-medium text-gray-950">
+                  Notes
+                </label>
+                <div className="flex-grow">
+
+                <Field name="notes" type="text" component={TextInputForm} />
+                </div>
+                </div>
+                {touched.notes && errors.notes && (
+                  <div className="text-red-600 text-sm pl-[110px]">{errors.notes}</div>
+                )}
+              </div>
+              <div className="flex flex-col gap-1">
+          <div className="md:flex items-center gap-1">
+            <label className="min-w-[100px] text-sm font-medium text-gray-950">
+                  Password
+                </label>
+                <div className="flex-grow">
+
+                <Field
+                  name="password"
+                  type="password"
+                  component={TextInputForm}
+                  placeholder="........."
+                />
+                </div>
+                </div>
+                {touched.password && errors.password && (
+                  <div className="text-red-600 text-sm pl-[110px]">{errors.password}</div>
+                )}
+              </div>
+
+           
+                <div className="flex flex-col gap-1">
+              <div className="md:flex items-center gap-1">
+              <label className="min-w-[100px] text-sm font-medium text-gray-950">
+              Permissions
+              </label>
+              <div className="flex-grow">
+                <ComboBox
+                  options={permissionOptions}
+                  placeholder="Select Permissions"
+                  onSelect={(selectedPermission) => {
+                    if (!values.userPermissions.includes(selectedPermission)) {
+                      setFieldValue("userPermissions", [
+                        ...values.userPermissions,
+                        selectedPermission,
+                      ]);
+                    }
+                  }}
+                  clearOnSelect={true}
+                />
+                </div>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {values.userPermissions.map((perm) => {
+                    const label =
+                      permissionOptions.find((p) => p.value === perm)?.label ||
+                      perm;
+                    return (
+                      <span
+                        key={perm}
+                        className="bg-blue-100 text-blue-700 px-2 py-1 rounded-md flex items-center"
+                      >
+                        {label}
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setFieldValue(
+                              "userPermissions",
+                              values.userPermissions.filter((p) => p !== perm)
+                            )
+                          }
+                          className="ml-2 text-red-500"
+                        >
+                          ×
+                        </button>
+                      </span>
+                    );
+                  })}
+                </div>
+                </div>
+                {touched.userPermissions && errors.userPermissions && (
+                  <div className="text-red-600 text-sm pl-[110px]">
+                    {errors.userPermissions}
+                  </div>
+               
+                )}
+                   </div>
+           
             <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
               <button
                 type="submit"
