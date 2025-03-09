@@ -1,5 +1,48 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { fetchClient , postClient , updateClient , deleteClient } from "@/store/clientSlice";
+import store from "@/store";
+
+
+export const clientService ={
+  async getAll() {
+    try {
+      return await store.dispatch(fetchClient());
+    }
+    catch(error){
+      console.error("Error fetching clients:", error);
+      throw error;
+    }
+  },
+
+  async create (clientData) {
+    try {
+return await store.dispatch(postClient(clientData));
+    } 
+    catch(error){
+      console.error("Error adding client:", error);
+      throw error;
+    }
+  },
+  async update(id, agentData) {
+    try {
+      return await store.dispatch(updateClient({ id, updateData: agentData }));
+    } catch (error) {
+      console.error("Error updating client:", error);
+      throw error;
+    }
+  },
+
+  async delete(id) {
+    try {
+      return await store.dispatch(deleteClient(id));
+    } catch (error) {
+      console.error("Error deleting client:", error);
+      throw error;
+    }
+  },
+
+}
 
 
 export const fetchClientById = async (id) => {

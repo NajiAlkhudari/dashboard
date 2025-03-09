@@ -1,31 +1,48 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { getCompanies , postCompany , updateCompany , deleteCompnay } from "@/store/companySlice";
+import store from "@/store";
 
-export const fetchCompanies = async () => {
-  const token = Cookies.get("token");
-  if (!token) {
-    console.error("no token found");
-    return null;
-  }
-  try {
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/Companies`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    if (response.status != 200) {
-      throw new Error("Failed to fetch data");
+export const compnayService ={
+  async getAll() {
+    try {
+      return await store.dispatch(getCompanies());
     }
-    return response.data?.data;
-  } catch (error) {
-    console.error("Error to fetch data : ", error.message);
-    return null;
-  }
-};
+    catch(error){
+      console.error("Error fetching companies:", error);
+      throw error;
+    }
+  },
+
+  async create (comapntData) {
+    try {
+return await store.dispatch(postCompany(comapntData));
+    } 
+    catch(error){
+      console.error("Error adding company:", error);
+      throw error;
+    }
+  },
+  async update(id, companyData) {
+    try {
+      return await store.dispatch(updateCompany({ id, updateData: companyData }));
+    } catch (error) {
+      console.error("Error updating company:", error);
+      throw error;
+    }
+  },
+
+  async delete(id) {
+    try {
+      return await store.dispatch(deleteCompnay(id));
+    } catch (error) {
+      console.error("Error deleting company:", error);
+      throw error;
+    }
+  },
+
+}
+
 
 export const fetchCompanyById = async (id) => {
   if (!id) {
@@ -57,91 +74,3 @@ export const fetchCompanyById = async (id) => {
   }
 };
 
-export const postCompany = async (companyData) => {
-  const token = Cookies.get("token");
-  if (!token) {
-    console.error("no token found");
-    return null;
-  }
-  try {
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/Companies`,
-      companyData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (response.status === 200 || response.status === 201) {
-      return true;
-    } else {
-      console.error("Failed to add company");
-      return null;
-    }
-  } catch (error) {
-    console.error("Error to adding company", error.message);
-    return null;
-  }
-};
-
-export const deleteCompany = async (id) => {
-  const token = Cookies.get("token");
-  if (!token) {
-    console.error("no token found");
-    return null;
-  }
-  try {
-    const response = await axios.delete(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/Companies/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    if (response.status === 200 || response.status === 204) {
-      return true;
-    } else {
-      console.error(`Failed to delete user, Status: ${response.status}`);
-      return false;
-    }
-  } catch (error) {
-    console.error("Failed to delete company", error.message);
-    return false;
-  }
-};
-
-export const UpdateCompany = async (id, companyData) => {
-  if (!id) {
-    console.error("Invalid company Id");
-    return null;
-  }
-  const token = Cookies.get("token");
-  if (!token) {
-    console.error("No token found");
-    return null;
-  }
-
-  try {
-    const response = await axios.put(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/Companies/${id}`,
-      companyData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    if (response.status === 200 || response.status === 204) {
-      return true;
-    } else {
-      console.error("failed to update company" ,  response.status);
-      return false;
-    }
-  } catch (error) {
-    console.error("Error to update company", error.message);
-    return false;
-  }
-};

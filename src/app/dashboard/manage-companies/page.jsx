@@ -1,22 +1,22 @@
 "use client";
 import Table from "@/components/partials/Table";
 import Card from "@/components/ui/Card";
-import {
-  fetchCompanyById,
-} from "@/Services/companyServices";
+import { fetchCompanyById, compnayService } from "@/Services/companyServices";
 import AddCompany from "@/components/company/AddCompany";
 import React, { useState, useEffect } from "react";
 import DeleteCompnayModal from "@/components/company/DeleteCompnayModal";
 import UpdateCompanyModal from "@/components/company/UpdateCompanyModal";
-import { useDispatch, useSelector } from "react-redux";
-import { getCompanies , postCompany, updateCompany , deleteCompnay } from "@/store/companySlice";
+import { useSelector } from "react-redux";
 import { Permissions } from "@/utils/Permissions";
 import withPermission from "@/utils/withPermission";
-import { showErrorToast , showSuccessToast , ToastContainer } from "@/utils/ToastNotifications";
+import {
+  showErrorToast,
+  showSuccessToast,
+  ToastContainer,
+} from "@/utils/ToastNotifications";
 import Loading from "./loading";
 
-const Page = () => {
-  const dispatch = useDispatch();
+  const Page = () => {
   const { companies, loading, error } = useSelector((state) => state.companies);
 
   const [activeModal, setActiveModal] = useState(null); // "add", "update", "delete"
@@ -25,28 +25,22 @@ const Page = () => {
   const [companyIdToUpdate, setCompanyIdToUpdate] = useState(null);
 
   useEffect(() => {
-    dispatch(getCompanies());
-  }, [dispatch]);
+    compnayService.getAll();
+  }, []);
 
-
-
-    const handleAddCompany = async (companyData) => {
-      try {
-      const  resultAction = await dispatch(postCompany(companyData));
-        if (postCompany.fulfilled.match(resultAction)) {
-                 showSuccessToast("Company added successfully!");
-               } else {
-                 showErrorToast(`Failed to add company. Error: ${resultAction.payload || "Unknown error"}`);
-               }
-             } catch (e) {
-               console.error("Error adding company:", e);
-               showErrorToast("An unexpected error occurred. Please try again.");
-             } finally {
-               setActiveModal(null);
-             }
-           };
-    
-    
+  const handleAddCompany = async (newcompanyData) => {
+    try {
+      await compnayService.create(newcompanyData);
+      showSuccessToast("company added successfully!");
+    } catch (error) {
+      console.error("Error adding company:", error);
+      showErrorToast(
+        `Failed to add company. Error: ${error.message || "Unknown error"}`
+      );
+    } finally {
+      setActiveModal(null);
+    }
+  };
 
   const handleUpdateCompany = async (updatedData) => {
     try {
@@ -54,23 +48,33 @@ const Page = () => {
         console.error("No companyIdToUpdate provided");
         return;
       }
-   const  resultAction =   await dispatch(
-        updateCompany({ id: companyIdToUpdate, updateData: updatedData })
+      await compnayService.update(companyIdToUpdate, updatedData);
+      showSuccessToast("Company updated successfully!");
+    } catch (error) {
+      console.error("Error updating company:", error);
+      showErrorToast(
+        `Failed to update company. Error: ${error.message || "Unknown error"}`
       );
-    if (updateCompany.fulfilled.match(resultAction)) {
-                showSuccessToast("Company update successfully!");
-              } else {
-                showErrorToast(`Failed to update company. Error: ${resultAction.payload || "Unknown error"}`);
-              }
-            } catch (e) {
-              console.error("Error update company:", e);
-              showErrorToast("An unexpected error occurred. Please try again.");
-            } finally {
-              setActiveModal(null);
-            }
-          };
-          
+    } finally {
+      setActiveModal(null);
+    }
+  };
 
+  const confirmhandleDelete = async () => {
+    try {
+      if (!companyIdToDelete) return;
+      await compnayService.delete(companyIdToDelete);
+      showSuccessToast("Company deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting company:", error);
+      showErrorToast(
+        `Failed to delete company. Error: ${error.message || "Unknown error"}`
+      );
+    } finally {
+      setActiveModal(null);
+      setCompanyIdToDelete(null);
+    }
+  };
 
   const openModalUpdate = async (id) => {
     try {
@@ -83,24 +87,6 @@ const Page = () => {
     }
   };
 
-  const confirmhandleDelete = async () => {
-     try {
-       if (!companyIdToDelete) return;
-      const resultAction =   await dispatch(deleteCompnay(companyIdToDelete));
-          if (deleteCompnay.fulfilled.match(resultAction)) {
-                   showSuccessToast("Company deleted successfully!");  
-                 } else {
-                   showErrorToast(`Failed to delete company. Error: ${resultAction.payload || "Unknown error"}`);  
-                 }
-          } catch (error) {
-            console.error("Error deleting company:", error);
-          } finally {
-            setActiveModal(null);  
-       setCompanyIdToDelete(null);
-     }
-   };
-   
-
   const columns = [
     { header: "ID", key: "id" },
     { header: "Name", key: "name" },
@@ -112,7 +98,7 @@ const Page = () => {
     { header: "Action", key: "action" },
   ];
 
-  if(loading) return <Loading />
+  if (loading) return <Loading />;
 
   return (
     <>
@@ -122,7 +108,7 @@ const Page = () => {
             <h1 className="text-2xl font-bold mb-4">Companies</h1>
             <button
               className="mb-4 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-sky-900 text-base font-medium text-white hover:bg-sky-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
-              onClick={() => setActiveModal("add")} 
+              onClick={() => setActiveModal("add")}
             >
               New Company
             </button>
@@ -135,7 +121,7 @@ const Page = () => {
             columns={columns}
             onDelete={(id) => {
               setCompanyIdToDelete(id);
-              setActiveModal("delete"); 
+              setActiveModal("delete");
             }}
             onUpdate={openModalUpdate}
           />

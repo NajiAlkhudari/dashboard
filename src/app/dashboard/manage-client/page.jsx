@@ -1,13 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Table from "@/components/partials/Table";
-import {
-  deleteClient,
-  fetchClient,
-  postClient,
-  updateClient,
-} from "@/store/clientSlice";
 import Loading from "./loading";
 import PostClientModal from "@/components/client/PostClientModal";
 import Card from "@/components/ui/Card";
@@ -21,10 +15,9 @@ import {
   showSuccessToast,
   ToastContainer,
 } from "@/utils/ToastNotifications";
+
+import { clientService } from "@/Services/clientService";
 const Page = () => {
-
-
-  const dispatch = useDispatch();
   const { clients, error, loading } = useSelector((state) => state.clients);
 
   const [activeModal, setActiveModal] = useState(null); // "add", "update" , "delete"
@@ -32,66 +25,57 @@ const Page = () => {
   const [clientIdToUpdate, setClientIdToUpdate] = useState(null);
   const [clientIdDelete, setClientDelete] = useState(null);
 
-
-
-  const handleAddClient = async (clientData) => {
+  const handleAddClient = async (newclientData) => {
     try {
-      const resultAction =  await dispatch(postClient(clientData));
-     if (postClient.fulfilled.match(resultAction)) {
-             showSuccessToast("Client added successfully!");
-           } else {
-             showErrorToast(`Failed to add client. Error: ${resultAction.payload || "Unknown error"}`);
-           }
-         } catch (e) {
-           console.error("Error adding client:", e);
-           showErrorToast("An unexpected error occurred. Please try again.");
-         } finally {
-           setActiveModal(null);
-         }
-       };
-       
-  
+      await clientService.create(newclientData);
+      showSuccessToast("client added successfully!");
+    } catch (error) {
+      console.error("Error adding client:", error);
+      showErrorToast(
+        `Failed to add client. Error: ${error.message || "Unknown error"}`
+      );
+    } finally {
+      setActiveModal(null);
+    }
+  };
+
   const handleUpdateClient = async (updatedData) => {
     try {
       if (!clientIdToUpdate) {
-        console.error("No clientIdToUpdate provided");
+        console.error("No agentIdToUpdate provided");
         return;
       }
-   const resultAction=   await dispatch(
-        updateClient({ id: clientIdToUpdate, updateData: updatedData })
+
+      await clientService.update(clientIdToUpdate, updatedData);
+
+      showSuccessToast("Client updated successfully!");
+    } catch (error) {
+      console.error("Error updating client:", error);
+      showErrorToast(
+        `Failed to update client. Error: ${error.message || "Unknown error"}`
       );
-     if (updateClient.fulfilled.match(resultAction)) {
-             showSuccessToast("Client update successfully!");
-           } else {
-             showErrorToast(`Failed to update client. Error: ${resultAction.payload || "Unknown error"}`);
-           }
-         } catch (e) {
-           console.error("Error update client:", e);
-           showErrorToast("An unexpected error occurred. Please try again.");
-         } finally {
-           setActiveModal(null);
-         }
-       };
-       
-  
+    } finally {
+      setActiveModal(null);
+    }
+  };
+
   const confirmhandleDelete = async () => {
     try {
       if (!clientIdDelete) return;
-   const resultAction =   await dispatch(deleteClient(clientIdDelete));
-    if (deleteClient.fulfilled.match(resultAction)) {
-             showSuccessToast("Client deleted successfully!");  
-           } else {
-             showErrorToast(`Failed to delete client. Error: ${resultAction.payload || "Unknown error"}`);  
-           }
+
+      await clientService.delete(clientIdDelete);
+
+      showSuccessToast("Client deleted successfully!");
     } catch (error) {
       console.error("Error deleting client:", error);
+      showErrorToast(
+        `Failed to delete client. Error: ${error.message || "Unknown error"}`
+      );
     } finally {
-      setActiveModal(null);  
+      setActiveModal(null);
       setClientDelete(null);
     }
   };
-  
-  
 
   const openModalUpdate = async (id) => {
     try {
@@ -109,8 +93,8 @@ const Page = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchClient());
-  }, [dispatch]);
+    clientService.getAll();
+  }, []);
 
   useEffect(() => {
     if (!activeModal) {
@@ -118,7 +102,6 @@ const Page = () => {
       setClientDataToUpdate(null);
     }
   }, [activeModal]);
-
 
   const columns = [
     { header: "ID", key: "id" },
@@ -130,8 +113,7 @@ const Page = () => {
     { header: "Action", key: "action" },
   ];
 
-  if (loading)   return <Loading />;
-  
+  if (loading) return <Loading />;
 
   return (
     <>

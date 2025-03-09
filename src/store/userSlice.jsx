@@ -70,7 +70,7 @@ export const updateUser = createAsyncThunk(
           },
         }
       );
-      return id;
+      return response.data.data;
     } catch (error) {
       return rejectWithValue(error.response ? error.response.data.message : error.message);
     }
@@ -91,7 +91,7 @@ export const deleteUser = createAsyncThunk(
         }
       );
       if (response.status === 200 || response.status === 204) {
-        return id;
+        return response.data.data;
       } else {
         console.error(`Failed to delete user, Status: ${response.status}`);
       }

@@ -3,40 +3,27 @@
 
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
-import { fetchCompanies } from '@/Services/companyServices';
 import Modal from '../ui/Modal';
 import TextInputForm from '../ui/TextInput/TextInputForm';
 import ComboBox from '../ui/ComboBox';
 import clientSchema from '@/validators/ClientValidation';
-
+import { getCompanies } from '@/store/companySlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const PostClientModal = ({ isOpen, onClose, onSubmitClient }) => {
-  const [companies, setCompanies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { companies, loading } = useSelector((state) => state.companies);
+
+
+
 
   useEffect(() => {
-    const loadCompanies = async () => {
-      try {
-        const companiesData = await fetchCompanies();
-        if (companiesData) {
-          setCompanies(
-            companiesData.map((company) => ({
-              label: company.name,
-              value: company.id,
-            }))
-          );
-        }
-      } catch (error) {
-        console.error('Error fetching companies:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     if (isOpen) {
-      loadCompanies();
+      dispatch(getCompanies());
     }
-  }, [isOpen]);
+  }, [isOpen, dispatch]);
+
+
 
   const handleSubmit = (values) => {
     onSubmitClient(values);
@@ -96,11 +83,14 @@ const PostClientModal = ({ isOpen, onClose, onSubmitClient }) => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Company</label>
-                  {isLoading ? (
+                  {loading ? (
                     <p>Loading companies...</p>
                   ) : (
                     <ComboBox
-                      options={companies}
+                      options={companies.map((company) => ({
+                        label: company.name,
+                        value: company.id,
+                      }))}
                       onSelect={(companyId) => setFieldValue('companyId', companyId)}
                       placeholder="Select a company"
                       clearOnSelect={false}

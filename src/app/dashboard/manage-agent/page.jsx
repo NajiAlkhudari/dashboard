@@ -1,32 +1,31 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Loading from "./loading";
 import Table from "@/components/partials/Table";
-import { deleteAgent, fetchAgents, postAgent, updateAgent } from "@/store/agentSlice";
 import withPermission from "@/utils/withPermission";
 import { Permissions } from "@/utils/Permissions";
 import AddAgent from "@/components/agent/AddAgent";
 import UpdateAgentModal from "@/components/agent/UpdateAgentModal";
 import Card from "@/components/ui/Card";
-import {  fetchAgentById } from "@/Services/agentService";
+import { fetchAgentById , agentService } from "@/Services/agentService";
 import DeleteAgentModal from "@/components/agent/DeleteAgentModal";
-import { showErrorToast , showSuccessToast , ToastContainer } from "@/utils/ToastNotifications";
-import Error from "../error";
-
+import {
+  showErrorToast,
+  showSuccessToast,
+  ToastContainer,
+} from "@/utils/ToastNotifications";
 const Page = () => {
-  const dispatch = useDispatch();
   const { agents, error, loading } = useSelector((state) => state.agents);
 
   const [activeModal, setActiveModal] = useState(null); // "add", "update" , "delete"
   const [agentDataToUpdate, setAgentDataToUpdate] = useState(null);
   const [agentIdToUpdate, setAgentIdToUpdate] = useState(null);
-    const [agentIdToDelete, setAgentIdToDelete] = useState(null);
-  
+  const [agentIdToDelete, setAgentIdToDelete] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchAgents());
-  }, [dispatch]);
+    agentService.getAll();
+  }, []);
 
   useEffect(() => {
     if (!activeModal) {
@@ -35,68 +34,57 @@ const Page = () => {
     }
   }, [activeModal]);
 
-  
+  const handleAddAgent = async (newAgentData) => {
+    try {
+      await agentService.create(newAgentData);
+      showSuccessToast("Agent added successfully!");
+    } catch (error) {
+      console.error("Error adding agent:", error);
+      showErrorToast(
+        `Failed to add agent. Error: ${error.message || "Unknown error"}`
+      );
+    } finally {
+      setActiveModal(null);
+    }
+  };
 
-    const handleAddAgent = async (newAgentData) => {
-      try {
-        const resultAction = await dispatch(postAgent(newAgentData));
-    
-        if (postAgent.fulfilled.match(resultAction)) {
-          showSuccessToast("Agent added successfully!");
-        } else {
-          showErrorToast(`Failed to add agent. Error: ${resultAction.payload || "Unknown error"}`);
-        }
-      } catch (e) {
-        console.error("Error adding agent:", e);
-        showErrorToast("An unexpected error occurred. Please try again.");
-      } finally {
-        setActiveModal(null);
+  const handleUpdate = async (updatedData) => {
+    try {
+      if (!agentIdToUpdate) {
+        console.error("No agentIdToUpdate provided");
+        return;
       }
-    };
-    
 
-    
-    const handleUpdate = async (updatedData) => {
-      try {
-        if (!agentIdToUpdate) {
-          console.error("No agentIdToUpdate provided");
-          return;
-        }
-        const resultAction = await dispatch(updateAgent({ id: agentIdToUpdate, updateData: updatedData }));
-    
-        if (updateAgent.fulfilled.match(resultAction)) {
-          showSuccessToast("Agent updated successfully!");  
-        } else {
-          showErrorToast(`Failed to update agent. Error: ${resultAction.payload || "Unknown error"}`);  
-        }
-      } catch (error) {
-        console.error("Error updating agent:", error);
-        showErrorToast("An unexpected error occurred. Please try again.");  
-      } finally {
-        setActiveModal(null);  
-      }
-    };
-    
-    const handleConfirmDelete = async () => {
-      try {
-        if (!agentIdToDelete) return;
-    
-        const resultAction = await dispatch(deleteAgent(agentIdToDelete));
-    
-        if (deleteAgent.fulfilled.match(resultAction)) {
-          showSuccessToast("Agent deleted successfully!");  
-        } else {
-          showErrorToast(`Failed to delete agent. Error: ${resultAction.payload || "Unknown error"}`);  
-        }
-      } catch (error) {
-        console.error("Error deleting agent:", error);
-        showErrorToast("An unexpected error occurred. Please try again.");  
-      } finally {
-        setActiveModal(null);     
-        setAgentIdToDelete(null); 
-      }
-    };
-    
+      await agentService.update(agentIdToUpdate, updatedData);
+
+      showSuccessToast("Agent updated successfully!");
+    } catch (error) {
+      console.error("Error updating agent:", error);
+      showErrorToast(
+        `Failed to update agent. Error: ${error.message || "Unknown error"}`
+      );
+    } finally {
+      setActiveModal(null);
+    }
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      if (!agentIdToDelete) return;
+
+      await agentService.delete(agentIdToDelete);
+
+      showSuccessToast("Agent deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting agent:", error);
+      showErrorToast(
+        `Failed to delete agent. Error: ${error.message || "Unknown error"}`
+      );
+    } finally {
+      setActiveModal(null);
+      setAgentIdToDelete(null);
+    }
+  };
 
   const openModalUpdate = async (id) => {
     try {
@@ -113,8 +101,8 @@ const Page = () => {
     }
   };
 
-if (loading) return <Loading />
-  
+  if (loading) return <Loading />;
+
   const columns = [
     { header: "ID", key: "id" },
     { header: "Name", key: "name" },
@@ -123,8 +111,6 @@ if (loading) return <Loading />
     { header: "Notes", key: "notes" },
     { header: "Action", key: "action" },
   ];
-
-
 
   return (
     <>
@@ -145,10 +131,10 @@ if (loading) return <Loading />
           <Table
             data={agents}
             columns={columns}
-            onUpdate={(id) => openModalUpdate(id)} 
+            onUpdate={(id) => openModalUpdate(id)}
             onDelete={(id) => {
               setAgentIdToDelete(id);
-              setActiveModal("delete"); 
+              setActiveModal("delete");
             }}
           />
         </div>
@@ -170,7 +156,7 @@ if (loading) return <Loading />
           />
         )}
 
-{activeModal === "delete" && (
+        {activeModal === "delete" && (
           <DeleteAgentModal
             isOpen={true}
             onClose={() => setActiveModal(null)}

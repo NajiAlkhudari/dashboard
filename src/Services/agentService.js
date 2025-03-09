@@ -1,5 +1,57 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { fetchAgents , postAgent , updateAgent , deleteAgent } from "@/store/agentSlice";
+import store from "@/store";
+
+export const agentService = {
+  async getAll() {
+    try {
+      return await store.dispatch(fetchAgents());
+    } catch (error) {
+      console.error("Error fetching agents:", error);
+      throw error;
+    }
+  },
+
+  async create(agentData) {
+    try {
+      return await store.dispatch(postAgent(agentData));
+    } catch (error) {
+      console.error("Error adding agent:", error);
+      throw error;
+    }
+  },
+
+  async update(id, agentData) {
+    try {
+      return await store.dispatch(updateAgent({ id, updateData: agentData })).unwrap();
+    } catch (error) {
+      console.error("Error updating agent:", error);
+      throw error;
+    }
+  },
+
+  async delete(id) {
+    try {
+      return await store.dispatch(deleteAgent(id)).unwrap();
+    } catch (error) {
+      console.error("Error deleting agent:", error);
+      throw error;
+    }
+  },
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const fetchAgentById = async (id) => {
     if (!id) {
@@ -17,6 +69,7 @@ export const fetchAgentById = async (id) => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       );
@@ -30,73 +83,6 @@ export const fetchAgentById = async (id) => {
       return null;
     }
   };
-  export const UpdateAgentTest = async (id, agentData) => {
-    if (!id) {
-      console.error("Invalid agent Id");
-      return false;
-    }
-
-    const token = Cookies.get("token");
-    if (!token) {
-      console.error("No token found");
-      return false;
-    }
-
-    try {
-      console.log(`Sending PUT request to update agent with ID: ${id}`);
-      console.log("Data being sent:", agentData);
-
-      const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/Agent/${id}`,
-        agentData, 
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      console.log("Response status:", response.status);
-
-      if (response.status === 200 || response.status === 204) {
-        return true;
-      } else {
-        console.error("Failed to update agent, status:", response.status);
-        return false;
-      }
-    } catch (error) {
-      console.error("Error updating agent", error.message);
-      return false;
-    }
-};
+ 
 
 
-
-
-
-export const deleteAgentTest = async (id) => {
-  const token = Cookies.get("token");
-  if (!token) {
-    console.error("no token found");
-    return null;
-  }
-  try {
-    const response = await axios.delete(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/Agent/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    if (response.status === 200 || response.status === 204) {
-      return true;
-    } else {
-      console.error(`Failed to delete agent, Status: ${response.status}`);
-      return false;
-    }
-  } catch (error) {
-    console.error("Failed to delete agent", error.message);
-    return false;
-  }
-};
