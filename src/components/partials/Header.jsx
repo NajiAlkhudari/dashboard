@@ -40,10 +40,10 @@ const viewAgent= useHasPermission(Permissions.CanReadAgent)
     setDropdownOpen(!isDropdownOpen);
   };
 
-  const navigateToLogin = () => {
-    Cookies.remove('token');
-    router.push("/unauthorize");  
-  };
+  // const navigateToLogin = () => {
+  //   Cookies.remove('token');
+  //   router.push("/");  
+  // };
 
   useEffect(() => {
     if (!name) {
@@ -73,13 +73,13 @@ const viewAgent= useHasPermission(Permissions.CanReadAgent)
           
             {success ? (
               <div className="relative">
-                <button
+                {/* <button
                   className="text-gray-800 dark:text-gray-50 flex items-center"
                   onClick={toggleDropdown}
-                >
-              welcome    {name} <span className="ml-2">&#x25BC;</span>
-                </button>
-                {isDropdownOpen && (
+                > */}
+              welcome    {name} 
+                {/* </button> */}
+                {/* {isDropdownOpen && (
                   <div className="absolute bg-white shadow-lg rounded-md mt-2 w-32 z-10">
                     <button
                       className="block w-full text-center text-gray-950 px-4 py-2 text-sm"
@@ -88,14 +88,14 @@ const viewAgent= useHasPermission(Permissions.CanReadAgent)
                       Logout
                     </button>
                   </div>
-                )}
+                )} */}
               </div>
             ) : (
               <div className="relative">
-                <button className="text-gray-800 flex items-center" onClick={toggleDropdown}>
+                {/* <button className="text-gray-800 flex items-center" onClick={toggleDropdown}> */}
                   Account
-                </button>
-                {isDropdownOpen && (
+                {/* </button> */}
+                {/* {isDropdownOpen && (
                   <div className="absolute bg-white shadow-lg rounded-md mt-2 w-32 z-10">
                     <button
                       className="block w-full text-center text-gray-950 px-4 py-2 text-sm"
@@ -104,7 +104,7 @@ const viewAgent= useHasPermission(Permissions.CanReadAgent)
                       Logout
                     </button>
                   </div>
-                )}
+                )} */}
               </div>
             )}
           </div>

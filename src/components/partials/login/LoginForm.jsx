@@ -25,8 +25,9 @@ const LoginForm = () => {
   };
   useEffect(() => {
     if (success) {
-      showSuccessToast("Login Success");
       router.push("/dashboard");
+      showSuccessToast("Login Success");
+
     }
     if (error) {
       showErrorToast(`Login Failed: ${error}`);
