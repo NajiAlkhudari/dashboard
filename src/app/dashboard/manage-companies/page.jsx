@@ -60,21 +60,26 @@ import Loading from "./loading";
     }
   };
 
-  const confirmhandleDelete = async () => {
-    try {
-      if (!companyIdToDelete) return;
-      await compnayService.delete(companyIdToDelete);
-      showSuccessToast("Company deleted successfully!");
-    } catch (error) {
-      console.error("Error deleting company:", error);
-      showErrorToast(
-        `Failed to delete company. Error: ${error.message || "Unknown error"}`
-      );
-    } finally {
-      setActiveModal(null);
-      setCompanyIdToDelete(null);
-    }
-  };
+ 
+
+    const confirmhandleDelete = async () => {
+      try {
+        if (!companyIdToDelete) return;
+    
+        await compnayService.delete(companyIdToDelete);
+        showSuccessToast("success delete company");
+      } catch (error) {
+    
+        const errorMessage = error || "Unknown error";
+    
+        showErrorToast(`${errorMessage}`);
+      } finally {
+        setActiveModal(null);
+        setCompanyIdToDelete(null);
+      }
+    };
+    
+  
 
   const openModalUpdate = async (id) => {
     try {

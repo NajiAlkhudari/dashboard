@@ -34,9 +34,8 @@ return await store.dispatch(postCompany(comapntData));
 
   async delete(id) {
     try {
-      return await store.dispatch(deleteCompnay(id));
+      return await store.dispatch(deleteCompnay(id)).unwrap();;
     } catch (error) {
-      console.error("Error deleting company:", error);
       throw error;
     }
   },
