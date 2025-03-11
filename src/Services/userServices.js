@@ -6,7 +6,7 @@ import store from "@/store";
 export const userService ={
   async getAll() {
     try {
-      return await store.dispatch(fetchUsers());
+      return await store.dispatch(fetchUsers()).unwrap();
     }
     catch(error){
       console.error("Error fetching usres:", error);
@@ -16,7 +16,7 @@ export const userService ={
 
   async create (userData) {
     try {
-return await store.dispatch(postUser(userData));
+return await store.dispatch(postUser(userData)).unwrap();
     } 
     catch(error){
       console.error("Error adding user:", error);
@@ -25,7 +25,7 @@ return await store.dispatch(postUser(userData));
   },
   async update(id, userData) {
     try {
-      return await store.dispatch(updateUser({ id, updateData: userData }));
+      return await store.dispatch(updateUser({ id, updateData: userData })).unwrap();
     } catch (error) {
       console.error("Error updating user:", error);
       throw error;
@@ -34,7 +34,7 @@ return await store.dispatch(postUser(userData));
 
   async delete(id) {
     try {
-      return await store.dispatch(deleteUser(id));
+      return await store.dispatch(deleteUser(id)).unwrap();
     } catch (error) {
       console.error("Error deleting user:", error);
       throw error;

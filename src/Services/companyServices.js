@@ -6,7 +6,7 @@ import store from "@/store";
 export const compnayService ={
   async getAll() {
     try {
-      return await store.dispatch(getCompanies());
+      return await store.dispatch(getCompanies()).unwrap();
     }
     catch(error){
       console.error("Error fetching companies:", error);
@@ -16,7 +16,7 @@ export const compnayService ={
 
   async create (comapntData) {
     try {
-return await store.dispatch(postCompany(comapntData));
+return await store.dispatch(postCompany(comapntData)).unwrap();
     } 
     catch(error){
       console.error("Error adding company:", error);
@@ -25,7 +25,7 @@ return await store.dispatch(postCompany(comapntData));
   },
   async update(id, companyData) {
     try {
-      return await store.dispatch(updateCompany({ id, updateData: companyData }));
+      return await store.dispatch(updateCompany({ id, updateData: companyData })).unwrap();
     } catch (error) {
       console.error("Error updating company:", error);
       throw error;
@@ -34,7 +34,7 @@ return await store.dispatch(postCompany(comapntData));
 
   async delete(id) {
     try {
-      return await store.dispatch(deleteCompnay(id)).unwrap();;
+      return await store.dispatch(deleteCompnay(id)).unwrap();
     } catch (error) {
       throw error;
     }

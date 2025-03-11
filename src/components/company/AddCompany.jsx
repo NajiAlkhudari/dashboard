@@ -16,7 +16,7 @@ const AddCompany = ({ isOpen, onClose, onSubmitCompany }) => {
       notes: values.notes,
       networkDomain: values.networkDomain,
     };
-    console.log("Sending new company data:", updatedData); // Add this line
+    console.log("Sending new company data:", updatedData); 
     onSubmitCompany(updatedData);
   };
 

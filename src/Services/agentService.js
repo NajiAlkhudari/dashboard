@@ -6,7 +6,7 @@ import store from "@/store";
 export const agentService = {
   async getAll() {
     try {
-      return await store.dispatch(fetchAgents());
+      return await store.dispatch(fetchAgents()).unwrap();
     } catch (error) {
       console.error("Error fetching agents:", error);
       throw error;
@@ -15,7 +15,7 @@ export const agentService = {
 
   async create(agentData) {
     try {
-      return await store.dispatch(postAgent(agentData));
+      return await store.dispatch(postAgent(agentData)).unwrap();
     } catch (error) {
       console.error("Error adding agent:", error);
       throw error;
