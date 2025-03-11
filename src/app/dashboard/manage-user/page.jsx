@@ -15,6 +15,8 @@ import {
   showErrorToast,
   showSuccessToast,
   ToastContainer,
+  showWarningToast,
+  
 } from "@/utils/ToastNotifications";
 import { fetchUserById } from "@/Services/userServices";
 import { userService } from "@/Services/userServices";
@@ -86,7 +88,7 @@ const Page = () => {
 
       await userService.delete(userIdToDelete);
 
-      showSuccessToast("User deleted successfully!");
+      showWarningToast("User deleted successfully!");
     } catch (error) {
       console.error("Error deleting user:", error);
       showErrorToast(

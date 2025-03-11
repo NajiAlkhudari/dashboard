@@ -14,6 +14,7 @@ import {
   showErrorToast,
   showSuccessToast,
   ToastContainer,
+  showWarningToast
 } from "@/utils/ToastNotifications";
 
 import { clientService } from "@/Services/clientService";
@@ -65,7 +66,7 @@ const Page = () => {
 
       await clientService.delete(clientIdDelete);
 
-      showSuccessToast("Client deleted successfully!");
+      showWarningToast("Client deleted successfully!");
     } catch (error) {
       console.error("Error deleting client:", error);
       showErrorToast(

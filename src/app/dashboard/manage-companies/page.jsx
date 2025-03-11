@@ -13,6 +13,7 @@ import {
   showErrorToast,
   showSuccessToast,
   ToastContainer,
+  showWarningToast
 } from "@/utils/ToastNotifications";
 import Loading from "./loading";
 
@@ -67,7 +68,7 @@ import Loading from "./loading";
         if (!companyIdToDelete) return;
     
         await compnayService.delete(companyIdToDelete);
-        showSuccessToast("success delete company");
+        showWarningToast("success delete company");
       } catch (error) {
     
         const errorMessage = error || "Unknown error";

@@ -14,6 +14,7 @@ import {
   showErrorToast,
   showSuccessToast,
   ToastContainer,
+  showWarningToast
 } from "@/utils/ToastNotifications";
 const Page = () => {
   const { agents, error, loading } = useSelector((state) => state.agents);
@@ -74,7 +75,7 @@ const Page = () => {
 
       await agentService.delete(agentIdToDelete);
 
-      showSuccessToast("Agent deleted successfully!");
+      showWarningToast("Agent deleted successfully!");
     } catch (error) {
       console.error("Error deleting agent:", error);
       showErrorToast(
