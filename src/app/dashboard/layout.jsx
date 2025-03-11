@@ -13,14 +13,12 @@ const Layout = ({ children }) => {
         isSidebarOpen={isSidebarOpen}
         onSidebarToggle={(state) => setSidebarOpen(state)}
       />
-
-      <Breadcrumbs />
-
       <main
         className={`p-6 transition-all duration-300 ${
           isSidebarOpen ? "ml-64" : "ml-0"
         }`}
       >
+             <Breadcrumbs />
         {children}
       </main>
     </div>

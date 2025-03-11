@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 const Breadcrumbs = () => {
   const pathname = usePathname();
-  const paths = pathname.split("/").filter((path) => path); // تقسيم المسار وإزالة القيم الفارغة
+  const paths = pathname.split("/").filter((path) => path);
 
   return (
     <nav className="text-gray-600 text-sm">
@@ -14,7 +14,6 @@ const Breadcrumbs = () => {
         <li>
           <Link href="/" className="text-blue-600 hover:underline">
           <IoHomeOutline />
-
           </Link>
         </li>
 

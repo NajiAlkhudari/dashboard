@@ -24,9 +24,9 @@ return await store.dispatch(postClient(clientData)).unwrap();
       throw error;
     }
   },
-  async update(id, agentData) {
+  async update(id, clientData) {
     try {
-      return await store.dispatch(updateClient({ id, updateData: agentData })).unwrap();
+      return await store.dispatch(updateClient({ id, updateData: clientData })).unwrap();
     } catch (error) {
       console.error("Error updating client:", error);
       throw error;
