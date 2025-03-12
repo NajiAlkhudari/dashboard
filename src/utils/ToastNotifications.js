@@ -9,7 +9,7 @@ const showSuccessToast = (message) => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "light",
+    theme: "colored",
   });
 };
 
@@ -22,7 +22,7 @@ const showErrorToast = (message) => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "light",
+    theme: "colored",
   });
 };
 
@@ -35,7 +35,7 @@ const showWarningToast = (message) => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "light",
+    theme: "colored",
   });
 };
 
