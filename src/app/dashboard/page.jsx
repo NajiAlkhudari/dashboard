@@ -22,7 +22,7 @@ const Page = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 p-1">
       {hasPermission && (
         <Card
           title="Users Management"
@@ -37,7 +37,7 @@ const Page = () => {
           >
             View
           </Button>
-          <p className="text-gray-700 text-center">
+          <p className="text-gray-700 dark:text-white text-center">
             Manage users, assign roles, and modify permissions easily.
           </p>
         </Card>
@@ -54,7 +54,7 @@ const Page = () => {
           <Button onClick={() => handleNavigate("/dashboard/manage-agent")}>
             View
           </Button>
-          <p className="text-gray-700 text-center">
+          <p className="text-gray-700 dark:text-white text-center">
             Manage agents, edit details, and control business account settings.
           </p>
         </Card>
@@ -71,7 +71,7 @@ const Page = () => {
           <Button onClick={() => handleNavigate("/dashboard/manage-companies")}>
             View
           </Button>
-          <p className="text-gray-700 text-center">
+          <p className="text-gray-700 dark:text-white text-center">
             Manage companies, edit details, and control business account
             settings.
           </p>
@@ -87,8 +87,8 @@ const Page = () => {
         </div>
         <Button onClick={() => handleNavigate("/dashboard")}>View</Button>
 
-        <p className="text-gray-700 text-center">
-          Manage supscriptions, edit details, and control business account
+        <p className="text-gray-700 dark:text-white text-center">
+        Manage supscriptions, edit details, and control business account
           settings.
         </p>
       </Card>
@@ -105,7 +105,7 @@ const Page = () => {
             View
           </Button>
 
-          <p className="text-gray-700 text-center">
+          <p className="text-gray-700 dark:text-white text-center">
             Manage clients, edit details, and control business account settings.
           </p>
         </Card>

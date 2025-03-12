@@ -31,7 +31,7 @@ const UpdateAgentModal = ({ isOpen, onClose,  onUpdateAgent , initialData}) => {
            <div className="space-y-4">
              <div className="flex flex-col gap-1">
                <div className="flex items-center gap-1">
-                 <label className="min-w-[100px] text-sm font-medium text-gray-900">Name</label>
+                 <label className="min-w-[100px] text-sm font-medium text-gray-900 dark:text-white">Name</label>
                  <div className="flex-grow">
                    <Field name="name" type="text" component={TextInputForm} className="w-full" />
                  </div>
@@ -43,7 +43,7 @@ const UpdateAgentModal = ({ isOpen, onClose,  onUpdateAgent , initialData}) => {
          
              <div className="flex flex-col gap-1">
                <div className="flex items-center gap-1">
-                 <label className="min-w-[100px] text-sm font-medium text-gray-950">Phone</label>
+                 <label className="min-w-[100px] text-sm font-medium text-gray-950 dark:text-white">Phone</label>
                  <div className="flex-grow">
                    <Field name="phone" type="text" component={TextInputForm} className="w-full" />
                  </div>
@@ -55,7 +55,7 @@ const UpdateAgentModal = ({ isOpen, onClose,  onUpdateAgent , initialData}) => {
          
              <div className="flex flex-col gap-1">
                <div className="flex items-center gap-1">
-                 <label className="min-w-[100px] text-sm font-medium text-gray-950">Percentage</label>
+                 <label className="min-w-[100px] text-sm font-medium text-gray-950 dark:text-white">Percentage</label>
                  <div className="flex-grow">
                    <Field name="percentage" type="number" component={TextInputForm} className="w-full" />
                  </div>
@@ -67,7 +67,7 @@ const UpdateAgentModal = ({ isOpen, onClose,  onUpdateAgent , initialData}) => {
          
              <div className="flex flex-col gap-1">
                <div className="flex items-center gap-1">
-                 <label className="min-w-[100px] text-sm font-medium text-gray-950">Notes</label>
+                 <label className="min-w-[100px] text-sm font-medium text-gray-950 dark:text-white">Notes</label>
                  <div className="flex-grow">
                    <Field name="notes" type="text" component={TextInputForm} className="w-full" />
                  </div>
@@ -81,7 +81,7 @@ const UpdateAgentModal = ({ isOpen, onClose,  onUpdateAgent , initialData}) => {
            <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
              <button
                type="submit"
-               className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-12 py-2 bg-gray-950 text-base font-medium text-white hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
+               className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-12 py-2 bg-gray-950 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
              >
                Update
              </button>

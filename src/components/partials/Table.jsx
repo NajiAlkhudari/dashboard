@@ -6,11 +6,11 @@ import { FaRegEdit } from "react-icons/fa";
 const Table = ({ data, columns, onDelete , onUpdate }) => {
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full bg-white border border-gray-300">
+      <table className="min-w-full bg-white border border-gray-300 dark:border-darkContent dark:bg-darkContent">
         <thead>
-          <tr className="bg-gray-100">
+          <tr className="bg-gray-100 dark:bg-background">
             {columns.map((column, index) => (
-              <th key={index} className="py-2 px-2 text-left text-sm font-semibold text-gray-900 lg:text-lg">
+              <th key={index} className="py-2 px-2 text-left text-sm font-semibold text-gray-900 dark:text-white lg:text-lg">
                 {column.header}
               </th>
             ))}
@@ -18,16 +18,16 @@ const Table = ({ data, columns, onDelete , onUpdate }) => {
         </thead>
         <tbody>
           {data.map((row, rowIndex) => (
-            <tr key={rowIndex} className="border-t border-gray-200">
+            <tr key={rowIndex} className="border-t border-gray-200 dark:border-background">
               {columns.map((column, colIndex) => (
-                <td key={colIndex} className="py-2 px-4 text-sm text-gray-950 md:py-4">
+                <td key={colIndex} className="py-2 px-4 text-sm text-gray-950 dark:text-white md:py-4">
                   {column.key === 'action' ? (
                     <div className='space-x-2'>
 
 <div className="relative group inline-block">
 
                  <button
-                      className=" border border-gray-900 text-gray-900 px-1 py-1 rounded-md  "
+                      className=" border border-gray-900 text-gray-900 dark:text-sky-400 px-1 py-1 rounded-md  "
                       onClick={() => onUpdate(row.id)} 
                     >
                       <FaRegEdit />
@@ -38,7 +38,7 @@ const Table = ({ data, columns, onDelete , onUpdate }) => {
                     </div>
                     <div className="relative group inline-block">
   <button
-    className="border border-gray-900 text-gray-900 px-1 py-1 rounded-md "
+    className="border border-gray-900 text-gray-900 dark:text-red-500 px-1 py-1 rounded-md "
     onClick={() => onDelete(row.id)}
   >
     <RiDeleteBin6Line />

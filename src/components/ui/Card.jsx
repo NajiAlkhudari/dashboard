@@ -3,7 +3,7 @@ import React from 'react';
 
 const Card = ({ children, className, title, subTitle }) => {
   return (
-    <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg  ${className}`}>
+    <div className={`bg-white dark:bg-darkContent rounded-xl shadow-lg  ${className}`}>
       {title && (
         <h1 className="text-xl font-semibold text-center text-gray-800 dark:text-gray-50 mb-2">
           {title}
@@ -11,7 +11,7 @@ const Card = ({ children, className, title, subTitle }) => {
       )}
 
       {subTitle && (
-        <h3 className="text-md font-medium text-center text-gray-600 dark:text-gray-300 mb-4">
+        <h3 className="text-md font-medium text-center text-gray-600 dark:text-white mb-4">
           {subTitle}
         </h3>
       )}

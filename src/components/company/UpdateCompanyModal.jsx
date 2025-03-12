@@ -40,7 +40,7 @@ const UpdateCompanyModal = ({ isOpen, onClose, onUpdate, initialData}) => {
             <div className="space-y-4">
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
-                <label className="min-w-[100px] text-sm font-medium text-gray-950">
+                <label className="min-w-[100px] text-sm font-medium ">
                 Name
                   </label>
                   <div className="flex-grow">
@@ -60,7 +60,7 @@ const UpdateCompanyModal = ({ isOpen, onClose, onUpdate, initialData}) => {
 
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
-                <label className="min-w-[100px] text-sm font-medium text-gray-950">
+                <label className="min-w-[100px] text-sm font-medium ">
                 Phone
                   </label>
                   <div className="flex-grow">
@@ -80,7 +80,7 @@ const UpdateCompanyModal = ({ isOpen, onClose, onUpdate, initialData}) => {
 
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
-                <label className="min-w-[100px] text-sm font-medium text-gray-950">
+                <label className="min-w-[100px] text-sm font-medium ">
                 Manager Name
                   </label>
                   <div className="flex-grow">
@@ -101,7 +101,7 @@ const UpdateCompanyModal = ({ isOpen, onClose, onUpdate, initialData}) => {
 
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
-                <label className="min-w-[100px] text-sm font-medium text-gray-950">
+                <label className="min-w-[100px] text-sm font-medium ">
                 Address
                   </label>
                   <div className="flex-grow">
@@ -120,7 +120,7 @@ const UpdateCompanyModal = ({ isOpen, onClose, onUpdate, initialData}) => {
 
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
-                <label className="min-w-[100px] text-sm font-medium text-gray-950">
+                <label className="min-w-[100px] text-sm font-medium ">
                 Network Domain
                   </label>
                   <div className="flex-grow">
@@ -141,7 +141,7 @@ const UpdateCompanyModal = ({ isOpen, onClose, onUpdate, initialData}) => {
 
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
-                <label className="min-w-[100px] text-sm font-medium text-gray-950">
+                <label className="min-w-[100px] text-sm font-medium ">
                 Notes
                   </label>
                   <div className="flex-grow">

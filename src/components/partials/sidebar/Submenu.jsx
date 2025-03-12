@@ -14,12 +14,12 @@ const SubMenu = ({ label, icon: Icon, subItems, onClick }) => {
       <div
         onClick={() => {
           if (onClick && !subItems) {
-            onClick();  // تأكد أن `onClick` تستدعى هنا بشكل صحيح
+            onClick(); 
           } else {
             toggleSubMenu();
           }
         }}
-        className="flex items-center cursor-pointer px-4 py-2 hover:bg-gray-300 rounded"
+        className="flex items-center cursor-pointer px-4 py-2 hover:bg-gray-900 hover:text-white rounded"
       >
         {Icon && <Icon className="mr-3 text-xl" />}
         <span>{label}</span>

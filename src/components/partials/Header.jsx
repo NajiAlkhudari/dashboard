@@ -13,8 +13,7 @@ import { detail } from "@/store/meSlice";
 import { Permissions, useHasPermission } from "@/utils/Permissions";
 import { FaUserSecret } from "react-icons/fa";
 import { MdOutlineRealEstateAgent } from "react-icons/md";
-import Cookies from "js-cookie";
-
+import ThemeSwitcher from "../ThemeSwitcher";
 
 const Header = ({ isSidebarOpen, onSidebarToggle }) => {
   const hasPermission = useHasPermission(Permissions.IsAdmin);
@@ -52,7 +51,7 @@ const viewAgent= useHasPermission(Permissions.CanReadAgent)
   }, [dispatch, name]);
 
   return (
-    <header className="sticky top-0 z-50 bg-gray-50 px-4 py-4 dark:bg-slate-800">
+    <header className="sticky top-0 z-50 bg-gray-50 px-4 py-4 dark:bg-darkContent">
       <div className="container mx-auto flex justify-between items-center">
         <button
           onClick={() => onSidebarToggle(true)}
@@ -65,10 +64,12 @@ const viewAgent= useHasPermission(Permissions.CanReadAgent)
           Dashboard
         </div>
       
-        <nav className="hidden sm:flex items-center space-x-4 text-sm sm:text-base lg:text-lg text-black">
-
+        <nav className="hidden sm:flex items-center space-x-4 text-sm sm:text-base lg:text-lg ">
+        <div>
+            <ThemeSwitcher />
+          </div>
           <div className="border-l border-gray-600 h-6"></div>
-          
+        
           <div className="flex space-x-2">
           
             {success ? (

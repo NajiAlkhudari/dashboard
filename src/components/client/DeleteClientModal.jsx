@@ -9,9 +9,9 @@ const DeleteClientModal = ({ isOpen, onClose, onDelete }) => {
         <Modal isOpen={isOpen} onClose={onClose} title="Confirm Delete">
         <div className="sm:flex sm:items-start">
           <div className="mt-3 text-center sm:mt-0 sm:text-left">
-            <h3 className="text-lg leading-6 font-medium text-gray-900"> Are you sure</h3>
+            <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white"> Are you sure</h3>
             <div className="mt-2">
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-300">
                 you want to delete this client? This action cannot be undone.
               </p>
             </div>

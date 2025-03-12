@@ -43,7 +43,7 @@ const UpdateClientModal = ({ isOpen, onClose, onUpdateClient, initialData }) => 
             <div className="space-y-4">
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
-                  <label className="min-w-[100px] text-sm font-medium text-gray-900">Name</label>
+                  <label className="min-w-[100px] text-sm font-medium">Name</label>
                   <Field
                     name="name"
                     type="text"
@@ -58,7 +58,7 @@ const UpdateClientModal = ({ isOpen, onClose, onUpdateClient, initialData }) => 
 
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
-                  <label className="min-w-[100px] text-sm font-medium text-gray-950">Phone</label>
+                  <label className="min-w-[100px] text-sm font-medium ">Phone</label>
                   <Field
                     name="phone"
                     type="text"
@@ -73,7 +73,7 @@ const UpdateClientModal = ({ isOpen, onClose, onUpdateClient, initialData }) => 
 
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
-                  <label className="min-w-[100px] text-sm font-medium text-gray-950">Prefix</label>
+                  <label className="min-w-[100px] text-sm font-medium ">Prefix</label>
                   <Field
                     name="prefex"
                     type="text"
@@ -88,7 +88,7 @@ const UpdateClientModal = ({ isOpen, onClose, onUpdateClient, initialData }) => 
 
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
-                  <label className="min-w-[100px] text-sm font-medium text-gray-950">Company</label>
+                  <label className="min-w-[100px] text-sm font-medium">Company</label>
                   {loading ? (
                     <p>Loading companies...</p>
                   ) : (

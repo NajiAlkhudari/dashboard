@@ -12,7 +12,7 @@ const TextInputForm = ({ field, form, ...props }) => {
           {...field}
           {...props}
           type={props.type === "password" && showPassword ? "text" : props.type}
-          className={` bg-slate-50 text-gray-950 mt-1 block py-2 px-4 w-full sm:w-80 md:w-96 lg:w-128 rounded-md border-2 border-gray-300 focus:outline-none focus:border-gray-950 ${
+          className={` bg-background dark:bg-background dark:text-white text-gray-950 mt-1 block py-2 px-4 w-full sm:w-80 md:w-96 lg:w-128 rounded-md border-2 border-gray-300 focus:outline-none focus:border-gray-950 ${
             form.touched[field.name] && form.errors[field.name]
               ? "border-red-600"
               : ""

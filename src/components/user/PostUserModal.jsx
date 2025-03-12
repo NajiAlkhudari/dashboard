@@ -37,7 +37,7 @@ const AddUserModal = ({ isOpen, onClose, onSumbitUser }) => {
             <div className="space-y-4">
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
-                  <label className="min-w-[100px] text-sm font-medium text-gray-900">
+                  <label className="min-w-[100px] text-sm font-medium ">
                     Name
                   </label>
                   <div className="flex-grow">
@@ -45,66 +45,70 @@ const AddUserModal = ({ isOpen, onClose, onSumbitUser }) => {
                   </div>
                 </div>
                 {touched.name && errors.name && (
-                  <div className="text-red-600 text-sm pl-[110px]">{errors.name}</div>
+                  <div className="text-red-600 text-sm pl-[110px]">
+                    {errors.name}
+                  </div>
                 )}
               </div>
 
-
               <div className="flex flex-col gap-1">
-              <div className="md:flex items-center gap-1">
-              <label className="min-w-[100px] text-sm font-medium text-gray-950">
-                  Notes
-                </label>
-                <div className="flex-grow">
-
-                <Field name="notes" type="text" component={TextInputForm} />
-                </div>
+                <div className="md:flex items-center gap-1">
+                  <label className="min-w-[100px] text-sm font-medium ">
+                    Notes
+                  </label>
+                  <div className="flex-grow">
+                    <Field name="notes" type="text" component={TextInputForm} />
+                  </div>
                 </div>
                 {touched.notes && errors.notes && (
-                  <div className="text-red-600 text-sm pl-[110px]">{errors.notes}</div>
+                  <div className="text-red-600 text-sm pl-[110px]">
+                    {errors.notes}
+                  </div>
                 )}
               </div>
               <div className="flex flex-col gap-1">
-          <div className="md:flex items-center gap-1">
-            <label className="min-w-[100px] text-sm font-medium text-gray-950">
-                  Password
-                </label>
-                <div className="flex-grow">
-
-                <Field
-                  name="password"
-                  type="password"
-                  component={TextInputForm}
-                  placeholder="........."
-                />
-                </div>
+                <div className="md:flex items-center gap-1">
+                  <label className="min-w-[100px] text-sm font-medium ">
+                    Password
+                  </label>
+                  <div className="flex-grow">
+                    <Field
+                      name="password"
+                      type="password"
+                      component={TextInputForm}
+                      placeholder="........."
+                    />
+                  </div>
                 </div>
                 {touched.password && errors.password && (
-                  <div className="text-red-600 text-sm pl-[110px]">{errors.password}</div>
+                  <div className="text-red-600 text-sm pl-[110px]">
+                    {errors.password}
+                  </div>
                 )}
               </div>
 
-           
-                <div className="flex flex-col gap-1">
-              <div className="md:flex items-center gap-1">
-              <label className="min-w-[100px] text-sm font-medium text-gray-950">
-              Permissions
-              </label>
-              <div className="flex-grow">
-                <ComboBox
-                  options={permissionOptions}
-                  placeholder="Select Permissions"
-                  onSelect={(selectedPermission) => {
-                    if (!values.userPermissions.includes(selectedPermission)) {
-                      setFieldValue("userPermissions", [
-                        ...values.userPermissions,
-                        selectedPermission,
-                      ]);
-                    }
-                  }}
-                  clearOnSelect={true}
-                />
-                </div>
+              <div className="flex flex-col gap-1">
+                <div className="md:flex items-center gap-1">
+                  <label className="min-w-[100px] text-sm font-medium ">
+                    Permissions
+                  </label>
+                  <div className="flex-grow">
+                    <ComboBox
+                      options={permissionOptions}
+                      placeholder="Select Permissions"
+                      onSelect={(selectedPermission) => {
+                        if (
+                          !values.userPermissions.includes(selectedPermission)
+                        ) {
+                          setFieldValue("userPermissions", [
+                            ...values.userPermissions,
+                            selectedPermission,
+                          ]);
+                        }
+                      }}
+                      clearOnSelect={true}
+                    />
+                  </div>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {values.userPermissions.map((perm) => {
@@ -133,15 +137,14 @@ const AddUserModal = ({ isOpen, onClose, onSumbitUser }) => {
                     );
                   })}
                 </div>
+              </div>
+              {touched.userPermissions && errors.userPermissions && (
+                <div className="text-red-600 text-sm pl-[110px]">
+                  {errors.userPermissions}
                 </div>
-                {touched.userPermissions && errors.userPermissions && (
-                  <div className="text-red-600 text-sm pl-[110px]">
-                    {errors.userPermissions}
-                  </div>
-               
-                )}
-                   </div>
-           
+              )}
+            </div>
+
             <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
               <button
                 type="submit"
