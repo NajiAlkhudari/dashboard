@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import Table from "@/components/partials/Table";
+import Table from "@/components/ui/Table";
 import Loading from "./loading";
 import PostClientModal from "@/components/client/PostClientModal";
 import Card from "@/components/ui/Card";

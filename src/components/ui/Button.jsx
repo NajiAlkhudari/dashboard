@@ -1,24 +1,20 @@
-"use client";
-import React from 'react'
+"use Client";
+ import React from 'react'
+ 
+const Button = ({className , disabled, value, type , onClick , children}) => {
+   return (
+<button
+className={`${className} bg-darkContent dark:bg-background w-full text-white h-10 rounded-md `}
+disabled={disabled}
+value={value}
+type={type}
+onClick={onClick}
+>
+    {children}
 
-const Button = ({className , disable ,type  , onClick  , children ,value }) => {
-  return (
-    <button className={`${className} bg-darkContent dark:bg-background text-white  rounded-md    w-full h-10 `}
-    disabled={disable}
-    type={type}
-    onClick={onClick}
-    value={value}
-   
-    >
-{children}
-
-      </button>
-     
-  )
-}
-
-export default Button
-
-
-
-
+</button>
+   )
+ }
+ 
+ export default Button
+ 

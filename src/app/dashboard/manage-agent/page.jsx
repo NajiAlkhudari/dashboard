@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Loading from "./loading";
-import Table from "@/components/partials/Table";
+import Table from "@/components/ui/Table";
 import withPermission from "@/utils/withPermission";
 import { Permissions } from "@/utils/Permissions";
 import AddAgent from "@/components/agent/AddAgent";

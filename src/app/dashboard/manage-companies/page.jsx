@@ -1,5 +1,5 @@
 "use client";
-import Table from "@/components/partials/Table";
+import Table from "@/components/ui/Table";
 import Card from "@/components/ui/Card";
 import { fetchCompanyById, compnayService } from "@/Services/companyServices";
 import AddCompany from "@/components/company/AddCompany";

@@ -1,17 +1,17 @@
 "use client";
 import { useSelector } from "react-redux";
-import { Permissions } from "@/utils/Permissions";
 
 const withPermission = (WrappedComponent, requiredPermission) => {
   return (props) => {
     const userPermissions = useSelector((state) => state.me.userPermissions);
-    
-    const hasPermission = (userPermissions & requiredPermission) === requiredPermission;
+
+    const hasPermission =
+      (userPermissions & requiredPermission) === requiredPermission;
 
     if (hasPermission) {
       return <WrappedComponent {...props} />;
     } else {
-      return <div>You do not have permission to view this content.</div>; 
+      return <div>You do not have permission to view this content.</div>;
     }
   };
 };

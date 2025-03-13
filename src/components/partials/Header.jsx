@@ -35,6 +35,7 @@ const viewAgent= useHasPermission(Permissions.CanReadAgent)
   const handleSidebarItemClick = (path) => {
     if (path) {
       router.push(path);
+    
       onSidebarToggle(false);
     }
   };

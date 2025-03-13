@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import Table from "@/components/partials/Table";
+import Table from "@/components/ui/Table";
 import DeleteUserModal from "@/components/user/DeleteUserModal";
 import UpdateUserModal from "@/components/user/UpdateUserModal";
 import AddUserModal from "@/components/user/PostUserModal";

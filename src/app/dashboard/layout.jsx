@@ -1,7 +1,6 @@
-
 "use client";
 import React, { useState } from "react";
-import Breadcrumbs from "@/components/partials/Breadcrumbs";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Header from "@/components/partials/Header";
 
 const Layout = ({ children }) => {
