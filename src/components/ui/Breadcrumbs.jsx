@@ -3,6 +3,7 @@ import { IoHomeOutline } from "react-icons/io5";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { IoIosArrowForward } from "react-icons/io";
 
 const Breadcrumbs = () => {
   const pathname = usePathname();
@@ -23,7 +24,7 @@ const Breadcrumbs = () => {
 
           return (
             <li key={fullPath} className="flex items-center">
-              <span className="mx-2">/</span>
+              <span className="mx-2"><IoIosArrowForward size={20} /></span>
               {isLast ? (
                 <span className="text-gray-400">{decodeURIComponent(path)}</span>
               ) : (
