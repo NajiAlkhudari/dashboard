@@ -58,7 +58,7 @@ const LoginForm = () => {
               />
               <ErrorMessage name="password" component="div" className="text-red-500 text-xs" />
             </div>
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit">
               {loading ? "loading..." : "Sign In"}
             </Button>
           </Form>
