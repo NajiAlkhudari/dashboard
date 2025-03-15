@@ -24,7 +24,7 @@ export default function Home() {
    
 <div className=" bg-gray-100 flex items-center justify-center ">
     
-<Login />
+    <Login />
 </div>
   </div>
   </>

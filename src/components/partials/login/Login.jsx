@@ -1,10 +1,9 @@
   "use client";
   import React from 'react'
   import LoginForm from './LoginForm'
-  import Card from '@/components/ui/Card'
 
   const Login = () => {
-    return (
+    return (  
       <div>       
     <div className="md:hidden block text-center mb-10">
       <p className='text-4xl font-extrabold text-yellow-500'>TU V P N</p>

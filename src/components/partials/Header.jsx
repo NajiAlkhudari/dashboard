@@ -17,6 +17,8 @@ import ThemeSwitcher from "../ThemeSwitcher";
 import Avatar from "../ui/Avatar";
 import { FaUserCircle } from "react-icons/fa";
 import Cookies from "js-cookie";
+import { SiOpenvpn } from "react-icons/si";
+
 
 
 const Header = ({ isSidebarOpen, onSidebarToggle }) => {
@@ -65,9 +67,11 @@ const viewAgent= useHasPermission(Permissions.CanReadAgent)
           <AiOutlineAlignCenter />
         </button>
 
-        <div className="absolute left-1/2 transform -translate-x-1/2 text-3xl font-bold text-gray-800 dark:text-gray-50">
-          Dashboard
+        <div className="flex space-x-14 left-1/2 transform -translate-x-1/2 text-3xl font-bold text-gray-800 dark:text-gray-50">
+        <SiOpenvpn />
+         Dashboard
         </div>
+      
       
         <nav className="hidden sm:flex items-center space-x-4 text-sm sm:text-base lg:text-lg ">
         <div>
