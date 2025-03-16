@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from "react";
 
 import Table from "@/components/ui/Table";
-import DeleteUserModal from "@/Models/user/DeleteUserModal";
-import UpdateUserModal from "@/Models/user/UpdateUserModal";
-import AddUserModal from "@/Models/user/PostUserModal";
+import DeleteUserModal from "@/components/user/DeleteUserModal";
+import UpdateUserModal from "@/components/user/UpdateUserModal";
+import AddUserModal from "@/components/user/PostUserModal";
 
 import {  useSelector } from "react-redux";
 import Card from "@/components/ui/Card";

@@ -1,8 +1,8 @@
 import React from "react";
 import Modal from "@/components/ui/Modal";
-import ComboBox from "../../components/ui/ComboBox";
+import ComboBox from "../ui/ComboBox";
 import { permissionOptions } from "../../utils/permissionOptions";
-import TextInputForm from "../../components/ui/TextInput/TextInputForm";
+import TextInputForm from "../ui/TextInput/TextInputForm";
 import { Formik, Form, Field } from "formik";
 import userSchema from "@/validators/AddUserValidation";
 const AddUserModal = ({ isOpen, onClose, onSumbitUser }) => {

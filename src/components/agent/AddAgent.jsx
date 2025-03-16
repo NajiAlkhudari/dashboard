@@ -3,8 +3,8 @@
 "use client";
 
 import React from "react";
-import Modal from "../../components/ui/Modal";
-import TextInputForm from "../../components/ui/TextInput/TextInputForm";
+import Modal from "../ui/Modal";
+import TextInputForm from "../ui/TextInput/TextInputForm";
 import { Formik, Form, Field } from "formik";
 import agentSchema from "@/validators/AgentValidation";
 const AddAgent = ({ isOpen, onClose, onSubmitAgent }) => {
