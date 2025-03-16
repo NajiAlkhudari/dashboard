@@ -17,7 +17,7 @@ import {
   showWarningToast
 } from "@/utils/ToastNotifications";
 const Page = () => {
-  const { agents, error, loading } = useSelector((state) => state.agents);
+  const { agents, error, isloading } = useSelector((state) => state.agents);
 
   const [activeModal, setActiveModal] = useState(null); // "add", "update" , "delete"
   const [agentDataToUpdate, setAgentDataToUpdate] = useState(null);
@@ -104,7 +104,7 @@ const Page = () => {
     }
   };
 
-  if (loading) return <Loading />;
+  if (isloading) return <Loading />;
 
   const columns = [
     { header: "ID", key: "id" },

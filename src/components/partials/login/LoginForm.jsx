@@ -36,7 +36,7 @@ const LoginForm = () => {
         {({ isSubmitting }) => (
           <Form className="space-y-6">
             <div>
-              <label className="text-sm">UserName</label>
+              <label className="text-sm text-black">UserName</label>
               <Field
                 type="text"
                 name="userName"
@@ -47,7 +47,7 @@ const LoginForm = () => {
               <ErrorMessage name="userName" component="div" className="text-red-500 text-xs" />
             </div>
             <div>
-              <label className="text-sm">Password</label>
+              <label className="text-sm text-black">Password</label>
               <Field
                 type="password"
                 name="password"

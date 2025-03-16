@@ -33,7 +33,7 @@ export const postSubsctiption = createAsyncThunk(
       return rejectWithValue("token not found");
     }
     try {
-      const response = axios.post(
+      const response =await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/api/Supscription`,
         postData,
         {
@@ -43,7 +43,7 @@ export const postSubsctiption = createAsyncThunk(
           },
         }
       );
-      return response.data.data;
+      return response?.data?.data; 
     } catch (error) {
       return rejectWithValue(
         error.response ? error.response.data.message : error.message
@@ -93,7 +93,7 @@ export const deleteSubscription = createAsyncThunk(
         }
       );
       if (response.status === 200 || response.status === 204) {
-        return response.data.data;
+        return response?.data?.data;
       } else {
         console.error(
           `Failed to delete Subscription, Status: ${response.status}`
@@ -135,7 +135,7 @@ const subscriptionSlice = createSlice({
       })
       .addCase(postSubsctiption.fulfilled, (state, action) => {
         state.loading = false;
-        state.subscriptions = [...state.subscriptions, action.payload];
+        state.subscriptions.push(action.payload);
       })
       .addCase(postSubsctiption.rejected, (state, action) => {
         state.loading = false;

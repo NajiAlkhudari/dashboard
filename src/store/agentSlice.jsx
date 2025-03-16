@@ -114,41 +114,41 @@ const agentSlice = createSlice({
   initialState: {
     agents: [],
     error: null,
-    loading: false,
+    isloading: false,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchAgents.pending, (state) => {
-        state.loading = true;
+        state.isloading = true;
         state.error = null;
       })
       .addCase(fetchAgents.fulfilled, (state, action) => {
-        state.loading = false;
+        state.isloading = false;
         state.agents = action.payload;
       })
       .addCase(fetchAgents.rejected, (state, action) => {
-        state.loading = false;
+        state.isloading = false;
         state.error = action.payload;
       })
       .addCase(postAgent.pending, (state) => {
-        state.loading = true;
+        state.isloading = true;
         state.error = null;
       })
       .addCase(postAgent.fulfilled, (state, action) => {
-        state.loading = false;
+        state.isloading = false;
         state.agents = [...state.agents, action.payload];
       })
       .addCase(postAgent.rejected, (state, action) => {
-        state.loading = false;
+        state.isloading = false;
         state.error = action.payload;
       })
       .addCase(updateAgent.pending, (state) => {
-        state.loading = true;
+        state.isloading = true;
         state.error = null;
       })
       .addCase(updateAgent.fulfilled, (state, action) => {
-        state.loading = false;
+        state.isloading = false;
         const index = state.agents.findIndex(
           (agent) => agent.id === action.payload.id
         );
@@ -157,21 +157,21 @@ const agentSlice = createSlice({
         }
       })
       .addCase(updateAgent.rejected, (state, action) => {
-        state.loading = false;
+        state.isloading = false;
         state.error = action.payload;
       })
       .addCase(deleteAgent.pending, (state) => {
-        state.loading = true;
+        state.isloading = true;
         state.error = null;
       })
       .addCase(deleteAgent.fulfilled, (state, action) => {
-        state.loading = false;
+        state.isloading = false;
         state.agents = state.agents.filter(
           (agent) => agent.id !== action.payload
         );
       })
       .addCase(deleteAgent.rejected, (state, action) => {
-        state.loading = false;
+        state.isloading = false;
         state.error = action.payload;
       });
   },

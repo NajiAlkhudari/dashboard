@@ -53,8 +53,8 @@ const PostClientModal = ({ isOpen, onClose, onSubmitClient }) => {
                 )}
               </div>
 
-              <div className="flex flex-col gap-1">
-                <div className="md:flex items-center gap-1">
+                <div className="flex flex-col gap-1">
+                  <div className="md:flex items-center gap-1">
                   <label className="min-w-[100px] text-sm font-medium ">Phone</label>
                   <Field
                     name="phone"

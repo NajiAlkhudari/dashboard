@@ -21,9 +21,8 @@ export const subscriptionService = {
   async create(postData) {
     try {
       return await store.dispatch(postSubsctiption(postData)).unwrap();
+      
     } catch (error) {
-      console.error("Error adding subsctiption:", error);
-
       throw error;
     }
   },
@@ -46,4 +45,37 @@ export const subscriptionService = {
       throw error;
     }
   },
+};
+
+
+
+export const fetchSupscriptionById = async (id) => {
+  if (!id) {
+    console.error("Invalid ID");
+    return null;
+  }
+  const token = Cookies.get("token");
+  if (!token) {
+    console.error("No token found");
+    return null;
+  }
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/Supscription/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.status != 200) {
+      console.error(`Failed to fetch Supscription, Status: ${response.status}`);
+      return null;
+    }
+    return response.data.data;
+  } catch (error) {
+    console.error("Error to Fetch Supscription by Id", error.message);
+    return null;
+  }
 };
