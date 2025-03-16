@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Modal from "../ui/Modal";
-import TextInputForm from "../ui/TextInput/TextInputForm";
+import Modal from "../../components/ui/Modal";
+import TextInputForm from "../../components/ui/TextInput/TextInputForm";
 import comapnySchema from "@/validators/CompanyValidation";
 import { Formik, Form, Field } from "formik";
 
-const AddCompany = ({ isOpen, onClose, onSubmitCompany }) => {
+const UpdateCompanyModal = ({ isOpen, onClose, onUpdate, initialData}) => {
   const handleSubmit = (values) => {
     const updatedData = {
       name: values.name,
@@ -16,26 +16,27 @@ const AddCompany = ({ isOpen, onClose, onSubmitCompany }) => {
       notes: values.notes,
       networkDomain: values.networkDomain,
     };
-    console.log("Sending new company data:", updatedData); 
-    onSubmitCompany(updatedData);
+    console.log("Sending new company data:", updatedData); // Add this line
+    onUpdate(updatedData);
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="New Company">
+    <Modal isOpen={isOpen} onClose={onClose} title="Update Company">
       <Formik
         initialValues={{
-          name: "",
-          address: "",
-          managerName: "",
-          notes: "",
-          networkDomain: "",
-          phone: "",
+          name : initialData.name || '',
+          phone : initialData.phone || '',
+          managerName : initialData.managerName || '',
+          address : initialData.address || '',
+          networkDomain : initialData.networkDomain || '',
+          notes : initialData.notes || '',
         }}
         validationSchema={comapnySchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched }) => (
-          <Form className="px-12">
+        {({ errors, touched }) => {
+          return (
+            <Form className="px-12">
             <div className="space-y-4">
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
@@ -79,7 +80,7 @@ const AddCompany = ({ isOpen, onClose, onSubmitCompany }) => {
 
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
-                <label className="min-w-[100px] text-sm font-medium">
+                <label className="min-w-[100px] text-sm font-medium ">
                 Manager Name
                   </label>
                   <div className="flex-grow">
@@ -162,7 +163,7 @@ const AddCompany = ({ isOpen, onClose, onSubmitCompany }) => {
                 type="submit"
                 className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-8 py-2 bg-gray-950 text-base font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
               >
-                Add
+                Update
               </button>
               <button
                 type="button"
@@ -173,10 +174,14 @@ const AddCompany = ({ isOpen, onClose, onSubmitCompany }) => {
               </button>
             </div>
           </Form>
-        )}
+          );
+        }}
       </Formik>
     </Modal>
   );
 };
 
-export default AddCompany;
+export default UpdateCompanyModal;
+
+
+

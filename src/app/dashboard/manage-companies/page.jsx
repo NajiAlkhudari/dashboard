@@ -2,10 +2,10 @@
 import Table from "@/components/ui/Table";
 import Card from "@/components/ui/Card";
 import { fetchCompanyById, compnayService } from "@/Services/companyServices";
-import AddCompany from "@/components/company/AddCompany";
+import AddCompany from "@/Models/company/AddCompany";
 import React, { useState, useEffect } from "react";
-import DeleteCompnayModal from "@/components/company/DeleteCompnayModal";
-import UpdateCompanyModal from "@/components/company/UpdateCompanyModal";
+import DeleteCompnayModal from "@/Models/company/DeleteCompnayModal";
+import UpdateCompanyModal from "@/Models/company/UpdateCompanyModal";
 import { useSelector } from "react-redux";
 import { Permissions } from "@/utils/Permissions";
 import withPermission from "@/utils/withPermission";

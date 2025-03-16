@@ -18,9 +18,9 @@ export const fetchSubscription = createAsyncThunk(
           },
         }
       );
-      return response.data.data;
+      return response?.data?.data || [];
     } catch (error) {
-      return rejectWithValue(error.response?.data || "An error occurred");
+      return rejectWithValue(error.response ? error.response.data.message : error.message );
     }
   }
 );

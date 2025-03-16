@@ -3,13 +3,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Table from "@/components/ui/Table";
 import Loading from "./loading";
-import PostClientModal from "@/components/client/PostClientModal";
+import PostClientModal from "@/Models/client/PostClientModal";
 import Card from "@/components/ui/Card";
 import withPermission from "@/utils/withPermission";
 import { Permissions } from "@/utils/Permissions";
-import UpdateClientModal from "@/components/client/UpdateClientModal";
+import UpdateClientModal from "@/Models/client/UpdateClientModal";
 import { fetchClientById } from "@/Services/clientService";
-import DeleteClientModal from "@/components/client/DeleteClientModal";
+import DeleteClientModal from "@/Models/client/DeleteClientModal";
 import {
   showErrorToast,
   showSuccessToast,

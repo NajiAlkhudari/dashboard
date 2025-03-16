@@ -18,6 +18,8 @@ import Avatar from "../ui/Avatar";
 import { FaUserCircle } from "react-icons/fa";
 import Cookies from "js-cookie";
 import { SiOpenvpn } from "react-icons/si";
+import { MdSubscriptions } from "react-icons/md";
+
 
 
 
@@ -26,6 +28,8 @@ const Header = ({ isSidebarOpen, onSidebarToggle }) => {
   const viewCompanies = useHasPermission(Permissions.CanReadCompany);
   const viewClient = useHasPermission(Permissions.CanReadClient);
 const viewAgent= useHasPermission(Permissions.CanReadAgent)
+const viewSubsciption= useHasPermission(Permissions.CanReadSupscription)
+
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -163,7 +167,14 @@ const viewAgent= useHasPermission(Permissions.CanReadAgent)
     onClick={() => handleSidebarItemClick("/dashboard/manage-agent")} 
   />
 )}
-        
+
+      {viewSubsciption && (
+    <SubMenu
+    label="Subsciption"
+    icon={MdSubscriptions}
+    onClick={() => handleSidebarItemClick("/dashboard/manage-subsciption")} 
+  />
+)}  
         </NavMenu>
       </Sidebar>
     </header>

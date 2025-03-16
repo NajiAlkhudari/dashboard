@@ -1,20 +1,17 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
-import Modal from '../ui/Modal';
-import TextInputForm from '../ui/TextInput/TextInputForm';
-import ComboBox from '../ui/ComboBox';
-import { useDispatch, useSelector  } from 'react-redux';
-import { getCompanies } from '@/store/companySlice';
+import Modal from '../../components/ui/Modal';
+import TextInputForm from '../../components/ui/TextInput/TextInputForm';
+import ComboBox from '../../components/ui/ComboBox';
 import clientSchema from '@/validators/ClientValidation';
+import { getCompanies } from '@/store/companySlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-
-const UpdateClientModal = ({ isOpen, onClose, onUpdateClient, initialData }) => {
-
-    const dispatch = useDispatch();
+const PostClientModal = ({ isOpen, onClose, onSubmitClient }) => {
+  const dispatch = useDispatch();
   const { companies, loading } = useSelector((state) => state.companies);
-
 
   useEffect(() => {
     if (isOpen) {
@@ -23,27 +20,27 @@ const UpdateClientModal = ({ isOpen, onClose, onUpdateClient, initialData }) => 
   }, [isOpen, dispatch]);
 
   const handleSubmit = (values) => {
-    onUpdateClient(values);
+    onSubmitClient(values);
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Update Client">
+    <Modal isOpen={isOpen} onClose={onClose} title="New Client">
       <Formik
         initialValues={{
-          name: initialData.name || '',
-          phone: initialData.phone || '',
-          prefex: initialData.prefex || '',
-          companyId: initialData.companyId || '',
+          name: '',
+          phone: '',
+          prefex: '',
+          companyId: null,
         }}
         validationSchema={clientSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched, setFieldValue }) => (
-            <Form className="px-12">
-            <div className="space-y-4">
-              <div className="flex flex-col gap-1">
-                <div className="md:flex items-center gap-1">
-                  <label className="min-w-[100px] text-sm font-medium">Name</label>
+        {({ errors, touched, setFieldValue , values }) => (
+         <Form className="px-12">
+                  <div className="space-y-4">
+                    <div className="flex flex-col gap-1">
+                      <div className="md:flex items-center gap-1">
+                        <label className="min-w-[100px] text-sm font-medium">Name</label>
                   <Field
                     name="name"
                     type="text"
@@ -73,7 +70,7 @@ const UpdateClientModal = ({ isOpen, onClose, onUpdateClient, initialData }) => 
 
               <div className="flex flex-col gap-1">
                 <div className="md:flex items-center gap-1">
-                  <label className="min-w-[100px] text-sm font-medium ">Prefix</label>
+                  <label className="min-w-[100px] text-sm font-medium">Prefix</label>
                   <Field
                     name="prefex"
                     type="text"
@@ -97,6 +94,7 @@ const UpdateClientModal = ({ isOpen, onClose, onUpdateClient, initialData }) => 
                         label: company.name,
                         value: company.id,
                       }))}
+                      value={values.companyId} 
                       onSelect={(companyId) => setFieldValue('companyId', companyId)}
                       placeholder="Select a company"
                       clearOnSelect={false}
@@ -114,7 +112,7 @@ const UpdateClientModal = ({ isOpen, onClose, onUpdateClient, initialData }) => 
                 type="submit"
                 className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-12 py-2 bg-gray-950 text-base font-medium text-white hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
               >
-                Update
+                Add
               </button>
               <button
                 type="button"
@@ -131,4 +129,4 @@ const UpdateClientModal = ({ isOpen, onClose, onUpdateClient, initialData }) => 
   );
 };
 
-export default UpdateClientModal;
+export default PostClientModal;

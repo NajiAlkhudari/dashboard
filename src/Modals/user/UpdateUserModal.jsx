@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 import Modal from "@/components/ui/Modal";
-import ComboBox from "../ui/ComboBox";
+import ComboBox from "../../components/ui/ComboBox";
 import { permissionOptions } from "@/utils/permissionOptions";
-import TextInputForm from "../ui/TextInput/TextInputForm";
+import TextInputForm from "../../components/ui/TextInput/TextInputForm";
 import { Formik, Form, Field } from "formik";
 import userUpdateSchema from "@/validators/UpdateUserSchema";
-import { showErrorToast } from "@/utils/ToastNotifications";
+import {showWarningToast } from "@/utils/ToastNotifications";
 const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
 
   
@@ -103,7 +103,7 @@ const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
                     placeholder="Select Permissions"
                     onSelect={(selectedPermission) => {
                             if ((values.userPermissions & selectedPermission) === selectedPermission) {
-                        showErrorToast("This permission already exists!")
+                        showWarningToast("This permission already exists!")
                         return;
                             }   
                         setFieldValue("userPermissions", [

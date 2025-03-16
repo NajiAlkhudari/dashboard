@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import Modal from "../ui/Modal";
-import TextInputForm from "../ui/TextInput/TextInputForm";
+import Modal from "../../components/ui/Modal";
+import TextInputForm from "../../components/ui/TextInput/TextInputForm";
 import { Formik, Form, Field } from "formik";
 import React from 'react'
 import subSchema from "@/validators/AddSubValidation";

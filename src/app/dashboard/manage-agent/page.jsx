@@ -5,11 +5,11 @@ import Loading from "./loading";
 import Table from "@/components/ui/Table";
 import withPermission from "@/utils/withPermission";
 import { Permissions } from "@/utils/Permissions";
-import AddAgent from "@/components/agent/AddAgent";
-import UpdateAgentModal from "@/components/agent/UpdateAgentModal";
+import AddAgent from "@/Models/agent/AddAgent";
+import UpdateAgentModal from "@/Models/agent/UpdateAgentModal";
 import Card from "@/components/ui/Card";
 import { fetchAgentById , agentService } from "@/Services/agentService";
-import DeleteAgentModal from "@/components/agent/DeleteAgentModal";
+import DeleteAgentModal from "@/Models/agent/DeleteAgentModal";
 import {
   showErrorToast,
   showSuccessToast,

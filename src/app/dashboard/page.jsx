@@ -85,7 +85,7 @@ const Page = () => {
         <div className="flex text-center justify-center text-orange-300">
           <MdSubscriptions size={70} />
         </div>
-        <Button onClick={() => handleNavigate("/dashboard")}>View</Button>
+        <Button onClick={() => handleNavigate("/dashboard/manage-subsciption")}>View</Button>
 
         <p className="text-gray-700 dark:text-white text-center">
         Manage supscriptions, edit details, and control business account
