@@ -6,6 +6,7 @@ import { permissionOptions } from "@/utils/permissionOptions";
 import TextInputForm from "../ui/TextInput/TextInputForm";
 import { Formik, Form, Field } from "formik";
 import userUpdateSchema from "@/validators/UpdateUserSchema";
+import { showErrorToast } from "@/utils/ToastNotifications";
 const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
 
   
@@ -101,13 +102,16 @@ const UpdateUserModal = ({ isOpen, onClose, onUpdate, initialData }) => {
                     options={permissionOptions}
                     placeholder="Select Permissions"
                     onSelect={(selectedPermission) => {
-                      if (!values.userPermissions.includes(selectedPermission)) {
+                            if ((values.userPermissions & selectedPermission) === selectedPermission) {
+                        showErrorToast("This permission already exists!")
+                        return;
+                            }   
                         setFieldValue("userPermissions", [
                           ...values.userPermissions,
                           selectedPermission,
                         ]);
                       }
-                    }}
+                    }
                     clearOnSelect={true}
                   />
                   </div>
