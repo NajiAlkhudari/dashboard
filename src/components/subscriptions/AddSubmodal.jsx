@@ -26,7 +26,7 @@ const AddSubModal = ({ isOpen, onClose, onSubmitSub }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="New Subscription" className="max-w-3xl">
+    <Modal isOpen={isOpen} onClose={onClose} title="New Subscription">
   <div className="max-h-[calc(100vh-100px)] overflow-y-auto p-6">
         <Formik
           initialValues={{
