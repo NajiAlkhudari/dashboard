@@ -69,6 +69,30 @@ const Page = () => {
     }
   };
 
+
+
+    const handleUpdateSub = async (updatedData) => {
+      try {
+        if (!subIdToUpdate) {
+          console.error("No Subscription IdToUpdate provided");
+          return;
+        }
+  
+        await subscriptionService.update(subIdToUpdate, updatedData);
+  
+        showSuccessToast("Subscription updated successfully!");
+      } catch (error) {
+        console.error("Error updating Subscription:", error);
+        showErrorToast(
+          `Failed to update Subscription. Error: ${error.message || "Unknown error"}`
+        );
+      } finally {
+        setActiveModal(null);
+      }
+    };
+
+
+
   const openModalUpdate = async (id) => {
     try {
       const subData = await fetchSupscriptionById(id);
@@ -132,6 +156,7 @@ const Page = () => {
           <UpdateSubModal
             isOpen={true}
             onClose={() => setActiveModal(null)}
+            onUpdateSub={handleUpdateSub}
             initialData={subDataToUpdate}
           />
         )}

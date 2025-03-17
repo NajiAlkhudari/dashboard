@@ -13,7 +13,6 @@ const UpdateSubModal = ({ isOpen, onClose, onUpdateSub, initialData }) => {
   const dispatch = useDispatch();
   const { clients, loading } = useSelector((state) => state.clients);
   const { agents, isLoading } = useSelector((state) => state.agents);
-
   useEffect(() => {
     if (isOpen) {
       dispatch(fetchClient());
@@ -203,7 +202,7 @@ const UpdateSubModal = ({ isOpen, onClose, onUpdateSub, initialData }) => {
                   type="submit"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-12 py-2 bg-gray-950 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
                 >
-                  Add
+                  Update
                 </button>
                 <button
                   type="button"

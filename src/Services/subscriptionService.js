@@ -73,7 +73,7 @@ export const fetchSupscriptionById = async (id) => {
       console.error(`Failed to fetch Supscription, Status: ${response.status}`);
       return null;
     }
-    return response.data.data;
+    return response?.data?.data;
   } catch (error) {
     console.error("Error to Fetch Supscription by Id", error.message);
     return null;
