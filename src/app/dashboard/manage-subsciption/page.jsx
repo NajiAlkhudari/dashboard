@@ -138,6 +138,7 @@ const Page = () => {
           <Table
             data={subscriptions}
             columns={columns}
+            showDetails={true}
             onUpdate={(id) => openModalUpdate(id)}
             onDelete={(id) => {
               setSubIdDelete(id);
