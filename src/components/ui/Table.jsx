@@ -3,7 +3,8 @@ import React from "react";
 import { useRouter, usePathname } from "next/navigation"; 
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
-import { BiDetail } from "react-icons/bi";
+import { MdOutlineVisibility } from "react-icons/md";
+
 
 const Table = ({ data, columns, onDelete, onUpdate, showDetails = false }) => { 
   const router = useRouter();
@@ -59,12 +60,12 @@ const Table = ({ data, columns, onDelete, onUpdate, showDetails = false }) => {
                         <div className="relative group inline-block">
                           <button
                             className="border border-gray-900 text-gray-900 dark:text-green-500 px-1 py-1 rounded-md"
-                            onClick={() => router.push(`${pathname}/${row.id}`)} // استخدام المسار الحالي
+                            onClick={() => router.push(`${pathname}/${row.id}`)} 
                           >
-                            <BiDetail />
+                            <MdOutlineVisibility />
                           </button>
                           <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-green-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                            Details
+                            View
                           </span>
                         </div>
                       )}
