@@ -74,8 +74,10 @@ export const fetchSupscriptionById = async (id) => {
       return null;
     }
     return response?.data?.data;
+   
   } catch (error) {
     console.error("Error to Fetch Supscription by Id", error.message);
     return null;
   }
+  
 };

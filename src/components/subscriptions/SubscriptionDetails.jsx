@@ -76,31 +76,35 @@ const SubscriptionDetails = ({ id }) => {
           </div>
         </Card>
 
-        <div className="flex flex-col space-y-4 md:flex-row md:space-x-4">
+        <div className="flex flex-col space-y-6 md:space-y-0   md:flex-row md:space-x-4">
           {data.client && (
-            <Card className="w-full md:w-1/2 p-6">
+            <Card className="w-full md:w-1/2  ">
+              <div className=" p-6 space-y-2 rounded-lg">
               <h1 className="text-2xl font-bold">Client</h1>
               <div className="border-t-2 dark:border-gray-300 border-black"></div>
-              <p>
+              <p className="text-darkContent dark:text-gray-400">
                 <strong>ID:</strong> {data.client.id}
               </p>
-              <p>
+              <p className="text-darkContent dark:text-gray-400">
                 <strong>Name:</strong> {data.client.name}
               </p>
-              <p>
+              <p className="text-darkContent dark:text-gray-400">
                 <strong>Phone:</strong> {data.client.phone}
               </p>
-              <p>
-                <strong>isActive:</strong> {data.client.isActive}
+              <p className="text-darkContent dark:text-gray-400">
+                <strong>isActive:</strong> {String(data.client.isActive)}
               </p>
-              <p>
+              <p className="text-darkContent dark:text-gray-400">
                 <strong>Prefex:</strong> {data.client.prefex}
               </p>
-              <p>
+              <p className="text-darkContent dark:text-gray-400">
                 <strong>KeyPath:</strong> {data.client.keyPath}
               </p>
+              </div>
             </Card>
           )}
+
+          
           {data.supscriptionAgents?.length > 0 && (
             <Card className="w-full p-6 bg-white rounded-lg shadow-lg dark:bg-darkContent">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
@@ -108,7 +112,7 @@ const SubscriptionDetails = ({ id }) => {
               </h3>
               <table className="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden dark:border-darkContent dark:bg-darkContent">
                 <thead>
-                  <tr className="bg-gray-100 dark:bg-background">
+                  <tr className="bg-background dark:bg-darkContent">
                     <th className="py-3 px-6 text-left text-sm font-medium text-gray-700 dark:text-white">
                       ID
                     </th>
@@ -127,7 +131,7 @@ const SubscriptionDetails = ({ id }) => {
                   {data.supscriptionAgents.map((agent, index) => (
                     <tr
                       key={index}
-                      className={`border-t border-gray-200 dark:border-background hover:bg-gray-50 dark:hover:bg-gray-700`}
+                      className={`border-t border-gray-200 dark:border-background `}
                     >
                       <td className="py-4 px-6 text-sm text-gray-950 dark:text-white">
                         {agent.id}
@@ -139,7 +143,7 @@ const SubscriptionDetails = ({ id }) => {
                         {agent.agentPercentage}%
                       </td>
                       <td className="py-4 px-6 text-sm text-gray-950 dark:text-white">
-                        {agent.phone}
+                        {agent.agent.phone}
                       </td>
                     </tr>
                   ))}
